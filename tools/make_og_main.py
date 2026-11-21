@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""生成星遊戲樂園首頁 OG 分享圖 (1200×630) - 六款遊戲 3×2 網格"""
+"""生成星遊戲樂園首頁 OG 分享圖 (1200×630) - 七款遊戲 4+3 網格"""
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
@@ -14,7 +14,7 @@ WHITE = "#ffffff"
 MUTED = "#a8a0c8"
 CARD_BG = "#1e1a3a"
 BORDER = "#3a3260"
-GAME_COLORS = ["#f5c451", "#5cff7c", "#ff6b5c", "#7c5cff", "#4ac8ff", "#ff5e9c"]
+GAME_COLORS = ["#f5c451", "#5cff7c", "#ff6b5c", "#7c5cff", "#4ac8ff", "#ff5e9c", "#4ae0c0"]
 
 
 def hex_to_rgb(h):
@@ -57,20 +57,21 @@ def main():
 
     # 字型
     try:
-        font_title = ImageFont.truetype("C:/Windows/Fonts/msjhbd.ttc", 50)
-        font_sub = ImageFont.truetype("C:/Windows/Fonts/msjh.ttc", 24)
-        font_card = ImageFont.truetype("C:/Windows/Fonts/msjhbd.ttc", 19)
-        font_card_sm = ImageFont.truetype("C:/Windows/Fonts/msjh.ttc", 13)
-        font_small = ImageFont.truetype("C:/Windows/Fonts/msjh.ttc", 12)
-        icon_font = ImageFont.truetype("C:/Windows/Fonts/seguiemj.ttf", 36)
+        font_title = ImageFont.truetype("C:/Windows/Fonts/msjhbd.ttc", 46)
+        font_sub = ImageFont.truetype("C:/Windows/Fonts/msjh.ttc", 21)
+        font_card = ImageFont.truetype("C:/Windows/Fonts/msjhbd.ttc", 17)
+        font_card_sm = ImageFont.truetype("C:/Windows/Fonts/msjh.ttc", 12)
+        font_small = ImageFont.truetype("C:/Windows/Fonts/msjh.ttc", 11)
+        icon_font = ImageFont.truetype("C:/Windows/Fonts/seguiemj.ttf", 32)
     except:
         font_title = font_sub = font_card = font_card_sm = font_small = icon_font = ImageFont.load_default()
 
     # 標題（左側）
-    draw.text((60, 42), "星遊戲樂園", font=font_title, fill=WHITE)
-    draw.text((60, 105), "Star Game Hub · 六款原創遊戲", font=font_sub, fill=ACCENT)
+    draw.text((55, 40), "星遊戲樂園", font=font_title, fill=WHITE)
+    draw.text((55, 100), "Star Game Hub", font=font_sub, fill=ACCENT)
+    draw.text((55, 132), "七款原創遊戲 · 單一靜態入口", font=font_small, fill=MUTED)
 
-    # 六款遊戲卡片：3×2 緊湊網格（右側）
+    # 七款遊戲卡片：4+3 網格（右側）
     games = [
         ("星耀拉霸", "Star Spin", "🎰", "三轉輪老虎機"),
         ("星節奏", "Star Beat", "🎵", "四軌節奏"),
@@ -78,44 +79,51 @@ def main():
         ("星影解謎", "Star Puzzle", "🧩", "分身解謎"),
         ("星際射手", "Star Shooter", "🚀", "太空射擊"),
         ("星軌防衛", "Star Tunnel", "◎", "管狀射擊"),
+        ("星塵危機", "Star Asteroids", "▲", "小行星射擊"),
     ]
 
-    card_w, card_h, gap = 200, 178, 14
-    grid_x, grid_y = 555, 45
+    card_w, card_h, gap = 156, 240, 10
+    cols = 4
+    grid_x, grid_y = 495, 42
 
     for i, (name, en, icon, desc) in enumerate(games):
-        row, col = i // 3, i % 3
+        row, col = i // cols, i % cols
         x = grid_x + col * (card_w + gap)
         y = grid_y + row * (card_h + gap)
         color = GAME_COLORS[i]
 
         card = Image.new("RGBA", (card_w, card_h), (0, 0, 0, 0))
         cd = ImageDraw.Draw(card)
-        cd.rounded_rectangle((0, 0, card_w, card_h), 12,
+        cd.rounded_rectangle((0, 0, card_w, card_h), 11,
                              fill=rgba(CARD_BG, 255), outline=rgba(BORDER, 255), width=2)
 
         # 圖示
-        cd.ellipse([card_w//2 - 32, 12, card_w//2 + 32, 76],
+        cd.ellipse([card_w//2 - 28, 14, card_w//2 + 28, 70],
                    fill=rgba(color, 35), outline=rgba(color, 110), width=2)
-        cd.text((card_w//2, 44), icon, font=icon_font, fill=color, anchor="mm")
+        cd.text((card_w//2, 42), icon, font=icon_font, fill=color, anchor="mm")
 
-        # 名稱 / 英文
-        cd.text((card_w//2, 98), name, font=font_card, fill=WHITE, anchor="mm")
-        cd.text((card_w//2, 124), en, font=font_card_sm, fill=MUTED, anchor="mm")
-        cd.text((card_w//2, 150), desc, font=font_small, fill=rgba(color, 220), anchor="mm")
+        # 名稱 / 英文 / 描述
+        cd.text((card_w//2, 100), name, font=font_card, fill=WHITE, anchor="mm")
+        cd.text((card_w//2, 128), en, font=font_card_sm, fill=MUTED, anchor="mm")
+        cd.text((card_w//2, 158), desc, font=font_small, fill=rgba(color, 220), anchor="mm")
+
+        # 免費標籤
+        cd.rounded_rectangle([card_w//2 - 42, 195, card_w//2 + 42, 220],
+                             radius=12, fill=rgba(color, 25), outline=rgba(color, 80), width=1)
+        cd.text((card_w//2, 207), "免費遊玩", font=font_small, fill=color, anchor="mm")
 
         img.paste(card, (x, y), card)
 
     # 左側特色列表
     features = ["零外部素材 · 純靜態", "鍵盤與觸控雙操作", "SEO / GEO 友善", "免註冊 · 開啟即玩"]
     for i, f in enumerate(features):
-        y = 185 + i * 58
-        draw.ellipse([62, y+6, 76, y+20], fill=GAME_COLORS[i])
-        draw.text((90, y), f, font=font_card_sm, fill=WHITE)
+        y = 195 + i * 56
+        draw.ellipse([57, y+5, 69, y+17], fill=GAME_COLORS[i])
+        draw.text((82, y), f, font=font_card_sm, fill=WHITE)
 
     # 底部網址
-    draw.line([(60, H-45), (W-60, H-45)], fill=rgba(ACCENT, 60), width=1)
-    draw.text((60, H-30), "https://vip-4.github.io/star-game-hub/", font=font_small, fill=rgba(ACCENT, 200))
+    draw.line([(55, H-42), (460, H-42)], fill=rgba(ACCENT, 60), width=1)
+    draw.text((55, H-28), "https://vip-4.github.io/star-game-hub/", font=font_small, fill=rgba(ACCENT, 200))
 
     img.save(OUT, "PNG")
     print(f"✅ OG 圖已生成：{OUT} ({W}×{H})")

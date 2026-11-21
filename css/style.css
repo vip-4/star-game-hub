@@ -75,6 +75,10 @@ a:hover { color: var(--accent-dark); }
 .tunnel-art span:nth-child(1) { background: #d63d78; }
 .tunnel-art span:nth-child(2) { background: #5ee0a0; color: #1a0f2e; }
 .tunnel-art span:nth-child(3) { background: #5ee0ff; color: #1a0f2e; }
+.asteroids-art { background: #0c1a1a; }
+.asteroids-art span:nth-child(1) { background: #4ae0c0; color: #0c1a1a; }
+.asteroids-art span:nth-child(2) { background: #b8c2d9; color: #0c1a1a; }
+.asteroids-art span:nth-child(3) { background: #ffb84a; color: #0c1a1a; }
 .card-tag { margin: 0 0 .3rem; color: var(--accent); font-size: .78rem; font-weight: 700; letter-spacing: .08em; }
 .game-card h3 { margin: 0 0 .5rem; font-size: 1.25rem; }
 .game-card p { margin: 0 0 .8rem; color: var(--ink-soft); font-size: .94rem; }

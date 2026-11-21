@@ -1,6 +1,0 @@
-{
-  "devDependencies": {
-    "@napi-rs/canvas": "^1.2.0",
-    "jsdom": "^31.0.1"
-  }
-}

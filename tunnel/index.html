@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>星軌防衛 Star Tunnel｜原創管狀射擊遊戲</title>
+  <meta name="description" content="星軌防衛：原創管狀射擊遊戲。沿著透視管道邊緣移動，射擊從深處爬出的敵人，翻轉閃避並防守核心。Canvas 2D 程序繪圖、Web Audio 即時合成音效、零外部素材、免註冊即玩。">
+  <meta name="keywords" content="管狀射擊,Tempest,復古街機,HTML5 遊戲,Canvas 遊戲,Web Audio,原創遊戲,輕量遊戲,星軌防衛">
+  <meta name="author" content="Star Game Hub 開發團隊">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="theme-color" content="#0a0a18">
+  <meta name="color-scheme" content="light dark">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <link rel="canonical" href="https://vip-4.github.io/star-game-hub/tunnel/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="星遊戲樂園 Star Game Hub">
+  <meta property="og:locale" content="zh_TW">
+  <meta property="og:title" content="星軌防衛 Star Tunnel｜原創管狀射擊遊戲">
+  <meta property="og:description" content="原創管狀射擊遊戲：透視管道、邊緣防守、翻轉閃避、程序生成波次。無外部素材、免註冊、免下載。">
+  <meta property="og:url" content="https://vip-4.github.io/star-game-hub/tunnel/">
+  <meta property="og:image" content="https://vip-4.github.io/star-game-hub/tunnel/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="星軌防衛遊戲畫面預覽：透視管道、玩家戰機與爬行的敵人">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="星軌防衛 Star Tunnel｜原創管狀射擊遊戲">
+  <meta name="twitter:description" content="原創管狀射擊遊戲，透視管道防守，支援鍵盤與觸控。">
+  <meta name="twitter:image" content="https://vip-4.github.io/star-game-hub/tunnel/og-image.png">
+  <meta name="twitter:image:alt" content="星軌防衛遊戲畫面預覽">
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "GameApplication",
+    "name": "星軌防衛 Star Tunnel",
+    "description": "原創管狀射擊遊戲：在透視管道邊緣移動，射擊從深處沿軌道爬出的敵人，使用翻轉閃避危機，守住核心。Canvas 2D 程序繪圖、Web Audio 即時合成音效、零外部素材。",
+    "url": "https://vip-4.github.io/star-game-hub/tunnel/",
+    "applicationCategory": "GameApplication",
+    "operatingSystem": "任何支援 HTML5 的瀏覽器",
+    "isAccessibleForFree": true,
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TWD" },
+    "genre": ["Shooter", "Arcade", "Action"],
+    "gamePlatform": "Web Browser",
+    "author": { "@type": "Organization", "name": "Star Game Hub 開發團隊" }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#game">跳至遊戲區域</a>
+
+  <header class="page-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="../" aria-label="返回星遊戲樂園首頁">
+        <span class="brand-mark" aria-hidden="true">★</span>
+        <span class="brand-text">星遊戲樂園</span>
+      </a>
+      <h1>星軌防衛 Star Tunnel</h1>
+    </div>
+  </header>
+
+  <main class="wrap" id="game">
+    <section class="game-area" aria-labelledby="game-title">
+      <h2 id="game-title" class="visually-hidden">遊戲畫面</h2>
+      <div class="canvas-wrap">
+        <canvas id="game-canvas" aria-label="星軌防衛遊戲畫面，載入中…" tabindex="0"></canvas>
+        <div id="overlay" class="overlay hidden" role="dialog" aria-modal="true" aria-labelledby="overlay-title">
+          <div class="overlay-content">
+            <h2 id="overlay-title">遊戲標題</h2>
+            <p id="overlay-message">遊戲訊息</p>
+            <div class="overlay-controls">
+              <button id="btn-start" class="btn primary" autofocus>開始遊戲</button>
+              <button id="btn-mute" class="btn secondary">靜音</button>
+            </div>
+            <p class="controls-hint" id="controls-hint"></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hud" aria-label="遊戲狀態資訊">
+        <div class="hud-item"><span class="hud-label">分數</span><span id="hud-score" class="hud-value">0</span></div>
+        <div class="hud-item"><span class="hud-label">波次</span><span id="hud-wave" class="hud-value">1</span></div>
+        <div class="hud-item"><span class="hud-label">生命</span><span id="hud-lives" class="hud-value">♥♥♥</span></div>
+        <div class="hud-item"><span class="hud-label">核心</span><span id="hud-core" class="hud-value">▮▮▮▮▮</span></div>
+      </div>
+
+      <div class="touch-controls" aria-label="觸控操作">
+        <button id="btn-left" class="touch-btn" aria-label="向左移動">◀</button>
+        <button id="btn-flip" class="touch-btn flip" aria-label="翻轉到對側">⇄</button>
+        <button id="btn-fire" class="touch-btn fire" aria-label="發射">●</button>
+        <button id="btn-right" class="touch-btn" aria-label="向右移動">▶</button>
+      </div>
+    </section>
+
+    <section class="info-section" aria-labelledby="info-title">
+      <h2 id="info-title" class="visually-hidden">遊戲說明</h2>
+      <div class="controls-grid">
+        <article class="control-card">
+          <h3>鍵盤操作</h3>
+          <ul>
+            <li><kbd>←</kbd><kbd>→</kbd> 或 <kbd>A</kbd><kbd>D</kbd>：沿邊緣移動</li>
+            <li><kbd>Space</kbd> / <kbd>W</kbd> / <kbd>↑</kbd>：發射</li>
+            <li><kbd>Shift</kbd> / <kbd>S</kbd> / <kbd>↓</kbd>：翻轉到對側</li>
+            <li><kbd>P</kbd> / <kbd>Esc</kbd>：暫停　<kbd>M</kbd>：靜音</li>
+          </ul>
+        </article>
+        <article class="control-card">
+          <h3>觸控操作</h3>
+          <ul>
+            <li>◀ ▶ 按鈕：沿管道邊緣移動</li>
+            <li>● 按鈕：按住連續發射</li>
+            <li>⇄ 按鈕：翻轉到對側軌道</li>
+          </ul>
+        </article>
+        <article class="control-card">
+          <h3>遊戲機制</h3>
+          <ul>
+            <li>敵人從管道深處沿軌道向外爬</li>
+            <li>抵達邊緣的敵人會變成沿邊爬行的蜘蛛</li>
+            <li>翻轉可瞬間到對側避開危機</li>
+            <li>核心生命歸零即遊戲結束</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="tech-section" aria-labelledby="tech-title">
+      <h2 id="tech-title" class="visually-hidden">技術資訊</h2>
+      <dl class="tech-list">
+        <dt>渲染</dt><dd>Canvas 2D 透視投影，依裝置像素比縮放</dd>
+        <dt>音訊</dt><dd>Web Audio API 即時合成，首次互動後解鎖</dd>
+        <dt>圖形</dt><dd>程序生成管道網格與幾何敵機，無外部圖片</dd>
+        <dt>關卡</dt><dd>程序生成波次與首領，難度遞增</dd>
+        <dt>無障礙</dt><dd>ARIA 標籤、完整鍵盤操作、prefers-reduced-motion</dd>
+      </dl>
+    </section>
+  </main>
+
+  <footer class="page-footer">
+    <div class="wrap footer-inner">
+      <p><a href="../">← 返回星遊戲樂園首頁</a></p>
+      <p>零外部素材 · 免註冊 · 開啟即玩</p>
+    </div>
+  </footer>
+
+  <script src="js/game.js"></script>
+</body>
+</html>

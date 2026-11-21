@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>星影解謎 Star Puzzle｜原創 HTML5 分身解謎平台遊戲（靜態、無外部素材）</title>
+  <meta name="description" content="星影解謎 Star Puzzle 是一款原創 HTML5 平台解謎遊戲。放置分身壓住壓力板、關閉雷射、收集三顆星並抵達出口。Canvas 2D 與 Web Audio 製作，零外部素材、免註冊、免下載。">
+  <meta name="keywords" content="解謎遊戲,平台遊戲,分身遊戲,HTML5 遊戲,Canvas 遊戲,Web Audio,原創遊戲,靜態遊戲,H5 game,益智遊戲">
+  <meta name="author" content="Star Puzzle 開發團隊">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="theme-color" content="#f5f2fa">
+  <meta name="color-scheme" content="light">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <link rel="canonical" href="https://vip-4.github.io/star-game-hub/puzzle/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="星影解謎 Star Puzzle">
+  <meta property="og:locale" content="zh_TW">
+  <meta property="og:title" content="星影解謎 Star Puzzle｜原創 HTML5 分身解謎平台遊戲">
+  <meta property="og:description" content="放置分身壓住壓力板、關閉雷射、收集星星並抵達出口。純靜態原創遊戲，免註冊、免下載。">
+  <meta property="og:url" content="https://vip-4.github.io/star-game-hub/puzzle/">
+  <meta property="og:image" content="https://vip-4.github.io/star-game-hub/puzzle/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="星影解謎 Star Puzzle 遊戲畫面，分身壓住壓力板關閉雷射">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="星影解謎 Star Puzzle｜原創 HTML5 分身解謎平台遊戲">
+  <meta name="twitter:description" content="純靜態分身解謎平台遊戲，原創圖形與合成音效，支援手機與桌機。">
+  <meta name="twitter:image" content="https://vip-4.github.io/star-game-hub/puzzle/og-image.png">
+  <meta name="twitter:image:alt" content="星影解謎 Star Puzzle 遊戲畫面預覽">
+
+  <link rel="alternate" type="text/plain" href="../llms.txt" title="星遊戲樂園 LLM 友善摘要">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232f2650'/%3E%3Cpath d='M20 44V20h14a10 10 0 010 20H20' fill='none' stroke='%23b8a2ff' stroke-width='6'/%3E%3Ccircle cx='44' cy='18' r='5' fill='%23ffd166'/%3E%3C/svg%3E">
+  <link rel="preload" href="css/style.css" as="style">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/game.js" defer></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://vip-4.github.io/star-game-hub/puzzle/#website",
+        "url": "https://vip-4.github.io/star-game-hub/puzzle/",
+        "name": "星影解謎 Star Puzzle",
+        "inLanguage": "zh-Hant",
+        "description": "原創 HTML5 分身解謎平台遊戲首頁，提供遊戲介紹、操作說明與常見問題。"
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://vip-4.github.io/star-game-hub/puzzle/#organization",
+        "name": "Star Puzzle 開發團隊",
+        "url": "https://vip-4.github.io/star-game-hub/puzzle/"
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://vip-4.github.io/star-game-hub/puzzle/#webpage",
+        "url": "https://vip-4.github.io/star-game-hub/puzzle/",
+        "name": "星影解謎 Star Puzzle｜原創 HTML5 分身解謎平台遊戲",
+        "isPartOf": { "@id": "https://vip-4.github.io/star-game-hub/puzzle/#website" },
+        "inLanguage": "zh-Hant",
+        "about": { "@id": "https://vip-4.github.io/star-game-hub/puzzle/#game" }
+      },
+      {
+        "@type": "GameApplication",
+        "@id": "https://vip-4.github.io/star-game-hub/puzzle/#game",
+        "name": "星影解謎 Star Puzzle",
+        "description": "原創平台解謎遊戲。玩家放置靜止分身壓住壓力板以關閉雷射，並在關卡中收集三顆星星、抵達出口。圖形由 Canvas 2D 繪製，音效由 Web Audio 即時合成，不使用任何第三方素材。",
+        "url": "https://vip-4.github.io/star-game-hub/puzzle/",
+        "applicationCategory": "GameApplication",
+        "operatingSystem": "任何支援 HTML5 的瀏覽器",
+        "browserRequirements": "需支援 Canvas 2D 與 Web Audio API 的瀏覽器",
+        "isAccessibleForFree": true,
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "TWD",
+          "description": "免費遊玩，無內購、無註冊"
+        },
+        "featureList": [
+          "分身壓板關閉雷射的核心解謎機制",
+          "三關卡設計，每關三顆可收集星星",
+          "Canvas 2D 即時渲染與 Web Audio 合成音效",
+          "鍵盤與觸控雙操作",
+          "ARIA 即時播報與減少動態效果支援",
+          "死亡即重置當前關卡，不中斷整體進度"
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://vip-4.github.io/star-game-hub/puzzle/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "星影解謎在玩什麼？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "玩家扮演一名星星特務，在單畫面關卡中移動與跳躍。關鍵機制是按 C 放置一個靜止分身：分身可以壓住壓力板，讓對應的雷射停止運作。玩家必須用有限的分身數壓住所有必要壓力板，再避開雷射抵達右側出口，並盡量收集每關三顆星星。"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "要怎麼操作星影解謎？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "鍵盤使用 A/D 或左右方向鍵移動，W、上方向鍵或空白鍵跳躍，C 放置分身，X 回收最後一個分身，R 重來目前關卡，Enter 進入下一關。手機可使用畫面下方的觸控按鈕。"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "被雷射碰到或掉下去會怎樣？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "會重新開始目前關卡，分身、壓力板與星星狀態都會重置。已在前一關取得的星星會保留，因此不會失去整體進度。"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "用了第三方遊戲引擎或素材嗎？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "沒有。本遊戲是原創實作，沒有使用 GameJs、Phaser、PixiJS 等任何遊戲引擎，也沒有外部圖片、音檔或字型；圖形由 Canvas 2D 逐幀繪製，音效由 Web Audio API 即時合成。"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "可以在手機上遊玩嗎？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "可以。介面採用響應式設計，並提供移動、跳躍、放置分身與回收分身的觸控按鈕。音效必須先點擊「開始遊戲」或「音效」按鈕才會解鎖，符合行動瀏覽器的自動播放限制。"
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#game-section">跳至遊戲區</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="#top" aria-label="星影解謎首頁">
+        <span class="brand-mark" aria-hidden="true">✧</span>
+        <span class="brand-text">星影解謎 <small>Star Puzzle</small></span>
+      </a>
+      <nav aria-label="主要導覽">
+        <ul class="nav-list">
+          <li><a href="#features">遊戲特色</a></li>
+          <li><a href="#how-to">玩法說明</a></li>
+          <li><a href="#faq">常見問題</a></li>
+          <li><a href="../">返回遊戲樂園</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top" class="wrap">
+    <section class="hero" aria-labelledby="page-title">
+      <p class="eyebrow">原創 · 純靜態 · 立即遊玩</p>
+      <h1 id="page-title">星影解謎 Star Puzzle：一款完全原創的 HTML5 分身解謎遊戲</h1>
+      <p class="lead">
+        星影解謎是一款單畫面平台解謎遊戲。玩家放置靜止的分身壓住壓力板，
+        讓擋路的雷射停止運作，再收集星星並抵達出口。
+        所有圖形由 Canvas 2D 繪製，音效由 Web Audio API 即時合成，
+        沒有外部素材、沒有後端，也不需要註冊或下載。
+      </p>
+      <dl class="fact-list" aria-label="遊戲重點摘要">
+        <div><dt>遊戲類型</dt><dd>平台解謎／益智</dd></div>
+        <div><dt>技術</dt><dd>Canvas 2D、ES6+、Web Audio</dd></div>
+        <div><dt>素材來源</dt><dd>原創繪製與程式合成，無第三方素材</dd></div>
+        <div><dt>費用</dt><dd>免費，無內購、無註冊</dd></div>
+      </dl>
+    </section>
+
+    <section id="game-section" class="game-section" aria-labelledby="game-heading">
+      <div class="section-heading">
+        <h2 id="game-heading">開始解謎</h2>
+        <p>用分身壓住壓力板關閉雷射，收集三顆星星後走進右側出口。</p>
+      </div>
+
+      <article class="game-card" aria-label="星影解謎遊戲介面">
+        <div class="hud" aria-label="遊戲狀態">
+          <div class="hud-item"><span class="hud-label">關卡</span><output id="level" class="hud-value">1 / 3</output></div>
+          <div class="hud-item"><span class="hud-label">本關星星</span><output id="stars" class="hud-value">0 / 3</output></div>
+          <div class="hud-item"><span class="hud-label">累計星星</span><output id="total-stars" class="hud-value">0</output></div>
+          <div class="hud-item"><span class="hud-label">分身</span><output id="clones" class="hud-value">1</output></div>
+        </div>
+
+        <div class="canvas-frame">
+          <canvas id="puzzle-canvas" width="960" height="540" role="img"
+                  aria-label="分身解謎遊戲畫面，目前尚未開始"></canvas>
+        </div>
+
+        <div class="controls">
+          <button type="button" id="start-button" class="primary-button">開始遊戲</button>
+          <button type="button" id="restart-button" class="utility-button">重來本關</button>
+          <button type="button" id="sound-button" class="utility-button" aria-pressed="false" aria-label="開啟音效">🔇 音效</button>
+        </div>
+
+        <div class="touch-controls" aria-label="觸控操作按鈕">
+          <button type="button" class="touch-button" data-action="left" aria-label="向左移動">←</button>
+          <button type="button" class="touch-button" data-action="right" aria-label="向右移動">→</button>
+          <button type="button" class="touch-button touch-button--jump" data-action="jump" aria-label="跳躍">↑ 跳</button>
+          <button type="button" class="touch-button touch-button--clone" data-action="clone" aria-label="放置分身">分身</button>
+          <button type="button" class="touch-button" data-action="recall" aria-label="回收分身">回收</button>
+        </div>
+
+        <p id="live-region" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
+        <p id="status-text" class="status-text">等待開始 · 按 Enter 或「開始遊戲」</p>
+        <noscript><p class="noscript-note">此遊戲需要 JavaScript 才能運作，上方文字說明仍可正常閱讀。</p></noscript>
+      </article>
+    </section>
+
+    <section id="features" class="content-section" aria-labelledby="features-heading">
+      <div class="section-heading">
+        <h2 id="features-heading">遊戲特色</h2>
+        <p>以純前端技術達成流暢體驗，同時兼顧可索引內容與無障礙操作。</p>
+      </div>
+      <div class="card-grid">
+        <article class="info-card">
+          <h3>原創解謎機制</h3>
+          <p>分身是靜止的實體，可以站在壓力板上，但不會幫你移動或開門。你必須規劃放置順序，用有限的次數同時滿足所有條件。</p>
+        </article>
+        <article class="info-card">
+          <h3>零外部素材</h3>
+          <p>沒有精靈圖、沒有 MP3、沒有外接字型，也沒有使用任何第三方遊戲引擎。所有視覺元素由 Canvas 繪製，所有聲音由 Web Audio 合成。</p>
+        </article>
+        <article class="info-card">
+          <h3>無障礙與行動支援</h3>
+          <p>提供鍵盤與觸控雙操作、ARIA 即時播報、清楚焦點樣式，並支援「減少動態效果」偏好設定。畫面會依裝置像素比調整。</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="how-to" class="content-section" aria-labelledby="howto-heading">
+      <div class="section-heading">
+        <h2 id="howto-heading">玩法與操作</h2>
+        <p>規則單純，但關卡設計需要一點思考。</p>
+      </div>
+      <ol class="steps">
+        <li><strong>開始遊戲。</strong>點擊「開始遊戲」或按 Enter，同時解鎖音效。</li>
+        <li><strong>放置分身。</strong>站在壓力板上按 C，分身會留在原地持續壓住它。</li>
+        <li><strong>關閉雷射。</strong>當同組壓力板都被壓住，對應雷射就會停止；按 X 可回收最後一個分身重新安排。</li>
+        <li><strong>抵達出口。</strong>收集星星並走進右側出口，按 Enter 前往下一關。</li>
+      </ol>
+      <h3>按鍵對照</h3>
+      <div class="table-wrap">
+        <table class="score-table">
+          <caption>鍵盤與觸控操作對照</caption>
+          <thead><tr><th scope="col">動作</th><th scope="col">鍵盤</th><th scope="col">觸控</th></tr></thead>
+          <tbody>
+            <tr><td>左右移動</td><td>A / D 或左右方向鍵</td><td>← / → 按鈕</td></tr>
+            <tr><td>跳躍</td><td>W、上方向鍵、空白鍵</td><td>↑ 跳 按鈕</td></tr>
+            <tr><td>放置分身</td><td>C</td><td>分身 按鈕</td></tr>
+            <tr><td>回收分身</td><td>X</td><td>回收 按鈕</td></tr>
+            <tr><td>重來本關</td><td>R</td><td>重來本關 按鈕</td></tr>
+            <tr><td>下一關</td><td>Enter</td><td>畫面提示按鈕</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="faq" class="content-section" aria-labelledby="faq-heading">
+      <div class="section-heading">
+        <h2 id="faq-heading">常見問題</h2>
+        <p>以下問答同時以結構化資料標記，方便搜尋引擎與生成式引擎摘要引用。</p>
+      </div>
+      <div class="faq-list">
+        <details><summary>星影解謎在玩什麼？</summary><p>玩家扮演一名星星特務，在單畫面關卡中移動與跳躍。關鍵機制是按 C 放置一個靜止分身：分身可以壓住壓力板，讓對應的雷射停止運作。玩家必須用有限的分身數壓住所有必要壓力板，再避開雷射抵達右側出口，並盡量收集每關三顆星星。</p></details>
+        <details><summary>要怎麼操作星影解謎？</summary><p>鍵盤使用 A/D 或左右方向鍵移動，W、上方向鍵或空白鍵跳躍，C 放置分身，X 回收最後一個分身，R 重來目前關卡，Enter 進入下一關。手機可使用畫面下方的觸控按鈕。</p></details>
+        <details><summary>被雷射碰到或掉下去會怎樣？</summary><p>會重新開始目前關卡，分身、壓力板與星星狀態都會重置。已在前一關取得的星星會保留，因此不會失去整體進度。</p></details>
+        <details><summary>用了第三方遊戲引擎或素材嗎？</summary><p>沒有。本遊戲是原創實作，沒有使用 GameJs、Phaser、PixiJS 等任何遊戲引擎，也沒有外部圖片、音檔或字型；圖形由 Canvas 2D 逐幀繪製，音效由 Web Audio API 即時合成。</p></details>
+        <details><summary>可以在手機上遊玩嗎？</summary><p>可以。介面採用響應式設計，並提供移動、跳躍、放置分身與回收分身的觸控按鈕。音效必須先點擊「開始遊戲」或「音效」按鈕才會解鎖，符合行動瀏覽器的自動播放限制。</p></details>
+      </div>
+    </section>
+
+    <aside class="tech-aside" aria-labelledby="tech-heading">
+      <h2 id="tech-heading">技術摘要</h2>
+      <dl>
+        <dt>渲染</dt><dd>Canvas 2D，依 devicePixelRatio 縮放（上限 2 倍）</dd>
+        <dt>音訊</dt><dd>Web Audio API 即時合成，首次操作後解鎖</dd>
+        <dt>狀態機</dt><dd>IDLE → PLAYING ⇄ PAUSED → LEVEL_CLEAR / RESULT</dd>
+        <dt>關卡</dt><dd>三關靜態資料驅動，邏輯與渲染分離</dd>
+        <dt>托管</dt><dd>純靜態檔案，無後端、無資料庫</dd>
+      </dl>
+    </aside>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <p><strong>原創聲明：</strong>本遊戲的玩法實作、關卡、圖形與音效皆為原創製作，未使用或複製任何既有作品的程式碼、關卡資料或美術素材。</p>
+      <p>本網站僅供娛樂與技術展示，免費遊玩，無內購、無註冊、無現金交易。</p>
+      <p><a href="../llms.txt">LLM 友善摘要</a> · <a href="../sitemap.xml">網站地圖</a></p>
+    </div>
+  </footer>
+</body>
+</html>

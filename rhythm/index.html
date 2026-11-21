@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>星節奏 Star Beat｜原創 HTML5 節奏遊戲（靜態、無外部素材）</title>
+  <meta name="description" content="星節奏 Star Beat 是一款原創 HTML5 節奏遊戲，使用 Canvas 2D 與 Web Audio 製作，圖形與音效全部由程式產生，無外部素材、免註冊、免下載，支援桌面與手機。">
+  <meta name="keywords" content="節奏遊戲,rhythm game,HTML5 遊戲,Canvas 遊戲,Web Audio,原創遊戲,靜態遊戲,H5 game,音樂遊戲,四軌節奏">
+  <meta name="author" content="Star Beat 開發團隊">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="theme-color" content="#f6f4fb">
+  <meta name="color-scheme" content="light">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <link rel="canonical" href="https://vip-4.github.io/star-game-hub/rhythm/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="星節奏 Star Beat">
+  <meta property="og:locale" content="zh_TW">
+  <meta property="og:title" content="星節奏 Star Beat｜原創 HTML5 節奏遊戲">
+  <meta property="og:description" content="四軌原創節奏遊戲，圖形與音效全部由程式產生，免註冊、免下載，開啟瀏覽器就能玩。">
+  <meta property="og:url" content="https://vip-4.github.io/star-game-hub/rhythm/">
+  <meta property="og:image" content="https://vip-4.github.io/star-game-hub/rhythm/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="星節奏 Star Beat 遊戲畫面，四條軌道與落下中的音符">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="星節奏 Star Beat｜原創 HTML5 節奏遊戲">
+  <meta name="twitter:description" content="純靜態四軌節奏遊戲，原創圖形與合成音效，支援手機與桌機。">
+  <meta name="twitter:image" content="https://vip-4.github.io/star-game-hub/rhythm/og-image.png">
+  <meta name="twitter:image:alt" content="星節奏 Star Beat 遊戲畫面預覽">
+
+  <link rel="alternate" type="text/plain" href="../llms.txt" title="星節奏 LLM 友善摘要">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232b2350'/%3E%3Ccircle cx='20' cy='40' r='6' fill='%23e05c65'/%3E%3Ccircle cx='34' cy='40' r='6' fill='%23e6a23c'/%3E%3Ccircle cx='48' cy='40' r='6' fill='%234a90d9'/%3E%3Cpath d='M32 10l4 10h10l-8 7 3 10-9-6-9 6 3-10-8-7h10z' fill='%23f5c451'/%3E%3C/svg%3E">
+  <link rel="preload" href="css/style.css" as="style">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/game.js" defer></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://vip-4.github.io/star-game-hub/rhythm/#website",
+        "url": "https://vip-4.github.io/star-game-hub/rhythm/",
+        "name": "星節奏 Star Beat",
+        "inLanguage": "zh-Hant",
+        "description": "原創 HTML5 節奏遊戲首頁，提供遊戲介紹、操作說明與常見問題。"
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://vip-4.github.io/star-game-hub/rhythm/#organization",
+        "name": "Star Beat 開發團隊",
+        "url": "https://vip-4.github.io/star-game-hub/rhythm/"
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://vip-4.github.io/star-game-hub/rhythm/#webpage",
+        "url": "https://vip-4.github.io/star-game-hub/rhythm/",
+        "name": "星節奏 Star Beat｜原創 HTML5 節奏遊戲",
+        "isPartOf": { "@id": "https://vip-4.github.io/star-game-hub/rhythm/#website" },
+        "inLanguage": "zh-Hant",
+        "about": { "@id": "https://vip-4.github.io/star-game-hub/rhythm/#game" }
+      },
+      {
+        "@type": "GameApplication",
+        "@id": "https://vip-4.github.io/star-game-hub/rhythm/#game",
+        "name": "星節奏 Star Beat",
+        "description": "純靜態四軌節奏遊戲。圖形由 Canvas 2D 繪製，音樂與音效由 Web Audio API 即時合成，不使用任何第三方素材，免註冊、免下載。",
+        "url": "https://vip-4.github.io/star-game-hub/rhythm/",
+        "applicationCategory": "GameApplication",
+        "operatingSystem": "任何支援 HTML5 的瀏覽器",
+        "browserRequirements": "需支援 Canvas 2D 與 Web Audio API 的瀏覽器",
+        "isAccessibleForFree": true,
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "TWD",
+          "description": "免費遊玩，無內購、無註冊"
+        },
+        "featureList": [
+          "四軌節奏判定",
+          "Canvas 2D 即時渲染",
+          "Web Audio 合成音樂與音效",
+          "鍵盤與觸控雙操作",
+          "ARIA 即時播報與減少動態效果支援"
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://vip-4.github.io/star-game-hub/rhythm/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "星節奏需要註冊或下載嗎？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "不需要。星節奏是純前端的靜態網頁遊戲，開啟首頁即可遊玩，沒有帳號系統、沒有下載程序，也沒有內購。"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "要怎麼操作星節奏？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "使用鍵盤 D、F、J、K 四鍵，或方向鍵左、下、上、右，對應畫面上的四條軌道。手機使用者可直接點觸畫面下方的四個軌道按鈕。當音符落到判定線時按下對應鍵即可得分。"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "遊戲的音效與圖形是哪裡來的？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "全部由程式即時產生。圖形使用 Canvas 2D 繪製，音樂與打擊聲由 Web Audio API 合成，沒有任何外部音檔、圖片或字型請求，因此載入速度快，也避免第三方素材授權問題。"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "判定方式與計分規則為何？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "音符與判定線的誤差在 70 毫秒內為 Perfect 得 300 分，140 毫秒內為 Good 得 100 分，超過 180 毫秒未按下則為 Miss 並中斷連擊。連續命中可累積 Combo，結算時顯示準確率。"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "可以在手機上遊玩嗎？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "可以。介面採用響應式設計，並提供四個觸控軌道按鈕。音效必須先點擊「開始遊戲」或「開啟音效」才會解鎖，這符合 iOS Safari 與多數行動瀏覽器的自動播放限制。"
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#game-section">跳至遊戲區</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="#top" aria-label="星節奏首頁">
+        <span class="brand-mark" aria-hidden="true">♪</span>
+        <span class="brand-text">星節奏 <small>Star Beat</small></span>
+      </a>
+      <nav aria-label="主要導覽">
+        <ul class="nav-list">
+          <li><a href="#features">遊戲特色</a></li>
+          <li><a href="#how-to">玩法說明</a></li>
+          <li><a href="#faq">常見問題</a></li>
+          <li><a href="../llms.txt">LLM 摘要</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top" class="wrap">
+    <section class="hero" aria-labelledby="page-title">
+      <p class="eyebrow">原創 · 純靜態 · 立即遊玩</p>
+      <h1 id="page-title">星節奏 Star Beat：一款完全原創的 HTML5 節奏遊戲</h1>
+      <p class="lead">
+        星節奏是一款四軌節奏遊戲，玩家在音符落到判定線時按下對應按鍵得分。
+        所有圖形由 Canvas 2D 繪製，音樂與音效由 Web Audio API 即時合成，
+        沒有外部素材、沒有後端，也不需要註冊或下載。
+      </p>
+      <dl class="fact-list" aria-label="遊戲重點摘要">
+        <div><dt>遊戲類型</dt><dd>四軌節奏音樂遊戲</dd></div>
+        <div><dt>技術</dt><dd>Canvas 2D、ES6+、Web Audio</dd></div>
+        <div><dt>素材來源</dt><dd>原創繪製與程式合成，無第三方素材</dd></div>
+        <div><dt>費用</dt><dd>免費，無內購、無註冊</dd></div>
+      </dl>
+    </section>
+
+    <section id="game-section" class="game-section" aria-labelledby="game-heading">
+      <div class="section-heading">
+        <h2 id="game-heading">開始演奏</h2>
+        <p>按下「開始遊戲」後，音符會從上方落下。使用 D F J K 或畫面下方按鈕擊打。</p>
+      </div>
+
+      <article class="game-card" aria-label="星節奏遊戲介面">
+        <div class="hud" aria-label="遊戲狀態">
+          <div class="hud-item"><span class="hud-label">分數</span><output id="score" class="hud-value">0</output></div>
+          <div class="hud-item"><span class="hud-label">連擊</span><output id="combo" class="hud-value">0</output></div>
+          <div class="hud-item"><span class="hud-label">準確率</span><output id="accuracy" class="hud-value">—</output></div>
+          <div class="hud-item"><span class="hud-label">狀態</span><output id="status" class="hud-value hud-value--small">等待開始</output></div>
+        </div>
+
+        <div class="canvas-frame">
+          <canvas id="rhythm-canvas" width="800" height="480" role="img"
+                  aria-label="四軌節奏遊戲畫面，目前尚未開始"></canvas>
+        </div>
+
+        <div class="controls">
+          <button type="button" id="start-button" class="primary-button">開始遊戲</button>
+          <button type="button" id="pause-button" class="utility-button" disabled>暫停</button>
+          <button type="button" id="reset-button" class="utility-button">重置</button>
+          <button type="button" id="sound-button" class="utility-button" aria-pressed="false" aria-label="開啟音效">🔇 音效</button>
+        </div>
+
+        <div class="touch-pads" aria-label="觸控軌道按鈕">
+          <button type="button" class="pad pad-0" data-lane="0" aria-label="軌道一，快捷鍵 D">D</button>
+          <button type="button" class="pad pad-1" data-lane="1" aria-label="軌道二，快捷鍵 F">F</button>
+          <button type="button" class="pad pad-2" data-lane="2" aria-label="軌道三，快捷鍵 J">J</button>
+          <button type="button" class="pad pad-3" data-lane="3" aria-label="軌道四，快捷鍵 K">K</button>
+        </div>
+
+        <p id="live-region" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
+        <noscript><p class="noscript-note">此遊戲需要 JavaScript 才能運作，上方文字說明仍可正常閱讀。</p></noscript>
+      </article>
+    </section>
+
+    <section id="features" class="content-section" aria-labelledby="features-heading">
+      <div class="section-heading">
+        <h2 id="features-heading">遊戲特色</h2>
+        <p>以純前端技術達成流暢體驗，同時兼顧可索引內容與無障礙操作。</p>
+      </div>
+      <div class="card-grid">
+        <article class="info-card">
+          <h3>零外部素材</h3>
+          <p>沒有圖片精靈圖、沒有 MP3、沒有外接字型。所有視覺元素由 Canvas 繪製，所有聲音由 Web Audio 合成，因此首屏只需少量 HTML、CSS 與 JavaScript。</p>
+        </article>
+        <article class="info-card">
+          <h3>流暢判定與動畫</h3>
+          <p>使用請求動畫影格與時間軸驅動音符位置，搭配物件池管理粒子效果，避免頻繁配置物件造成卡頓，並依裝置像素比調整解析度。</p>
+        </article>
+        <article class="info-card">
+          <h3>無障礙與行動支援</h3>
+          <p>提供鍵盤與觸控雙操作、ARIA 即時播報、清楚焦點樣式，並支援「減少動態效果」偏好設定，讓不同裝置與使用情境都能遊玩。</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="how-to" class="content-section" aria-labelledby="howto-heading">
+      <div class="section-heading">
+        <h2 id="howto-heading">玩法與計分</h2>
+        <p>規則單純，適合首次接觸節奏遊戲的玩家。</p>
+      </div>
+      <ol class="steps">
+        <li><strong>開始遊戲。</strong>點擊「開始遊戲」解鎖音效並啟動譜面。</li>
+        <li><strong>對應軌道。</strong>四條軌道由左至右對應 D、F、J、K，也可用方向鍵或觸控按鈕。</li>
+        <li><strong>精準擊打。</strong>音符通過判定線時按下，誤差越小得分越高。</li>
+        <li><strong>查看結算。</strong>曲子結束後顯示最終分數、最大連擊與準確率。</li>
+      </ol>
+      <h3>判定標準</h3>
+      <div class="table-wrap">
+        <table class="score-table">
+          <caption>以音符與判定線的時間誤差計算</caption>
+          <thead><tr><th scope="col">判定</th><th scope="col">誤差範圍</th><th scope="col">分數</th></tr></thead>
+          <tbody>
+            <tr><td>Perfect</td><td>70 毫秒內</td><td>300</td></tr>
+            <tr><td>Good</td><td>140 毫秒內</td><td>100</td></tr>
+            <tr><td>Miss</td><td>超過 180 毫秒未按下</td><td>0，連擊中斷</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="faq" class="content-section" aria-labelledby="faq-heading">
+      <div class="section-heading">
+        <h2 id="faq-heading">常見問題</h2>
+        <p>以下問答同時以結構化資料標記，方便搜尋引擎與生成式引擎摘要引用。</p>
+      </div>
+      <div class="faq-list">
+        <details><summary>星節奏需要註冊或下載嗎？</summary><p>不需要。星節奏是純前端的靜態網頁遊戲，開啟首頁即可遊玩，沒有帳號系統、沒有下載程序，也沒有內購。</p></details>
+        <details><summary>要怎麼操作星節奏？</summary><p>使用鍵盤 D、F、J、K 四鍵，或方向鍵左、下、上、右，對應畫面上的四條軌道。手機使用者可直接點觸畫面下方的四個軌道按鈕。當音符落到判定線時按下對應鍵即可得分。</p></details>
+        <details><summary>遊戲的音效與圖形是哪裡來的？</summary><p>全部由程式即時產生。圖形使用 Canvas 2D 繪製，音樂與打擊聲由 Web Audio API 合成，沒有任何外部音檔、圖片或字型請求，因此載入速度快，也避免第三方素材授權問題。</p></details>
+        <details><summary>判定方式與計分規則為何？</summary><p>音符與判定線的誤差在 70 毫秒內為 Perfect 得 300 分，140 毫秒內為 Good 得 100 分，超過 180 毫秒未按下則為 Miss 並中斷連擊。連續命中可累積 Combo，結算時顯示準確率。</p></details>
+        <details><summary>可以在手機上遊玩嗎？</summary><p>可以。介面採用響應式設計，並提供四個觸控軌道按鈕。音效必須先點擊「開始遊戲」或「開啟音效」才會解鎖，這符合 iOS Safari 與多數行動瀏覽器的自動播放限制。</p></details>
+      </div>
+    </section>
+
+    <aside class="tech-aside" aria-labelledby="tech-heading">
+      <h2 id="tech-heading">技術摘要</h2>
+      <dl>
+        <dt>渲染</dt><dd>Canvas 2D，依 devicePixelRatio 縮放（上限 2 倍）</dd>
+        <dt>音訊</dt><dd>Web Audio API 即時合成，首次操作後解鎖</dd>
+        <dt>狀態機</dt><dd>IDLE → PLAYING → PAUSED → RESULT</dd>
+        <dt>譜面</dt><dd>種子式偽隨機產生，每次遊戲節奏一致</dd>
+        <dt>托管</dt><dd>純靜態檔案，無後端、無資料庫</dd>
+      </dl>
+    </aside>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <p><strong>原創聲明：</strong>本遊戲的圖形、譜面與音效皆為原創製作，由 Canvas 2D 與 Web Audio API 即時產生，未使用任何第三方遊戲素材或音樂。</p>
+      <p>本網站僅供娛樂與技術展示，免費遊玩，無內購、無註冊、無現金交易。</p>
+      <p><a href="../llms.txt">LLM 友善摘要</a> · <a href="../sitemap.xml">網站地圖</a></p>
+    </div>
+  </footer>
+</body>
+</html>

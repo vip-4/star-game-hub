@@ -87,6 +87,10 @@ a:hover { color: var(--accent-dark); }
 .branch-art span:nth-child(1) { background: #ff5e7e; }
 .branch-art span:nth-child(2) { background: #ffd166; color: #1a1030; }
 .branch-art span:nth-child(3) { background: #5eb8ff; }
+.serpent-art { background: #0c1a12; }
+.serpent-art span:nth-child(1) { background: #5ee08a; color: #0c1a12; }
+.serpent-art span:nth-child(2) { background: #ffd166; color: #0c1a12; }
+.serpent-art span:nth-child(3) { background: #ff5e7e; }
 .card-tag { margin: 0 0 .3rem; color: var(--accent); font-size: .78rem; font-weight: 700; letter-spacing: .08em; }
 .game-card h3 { margin: 0 0 .5rem; font-size: 1.25rem; }
 .game-card p { margin: 0 0 .8rem; color: var(--ink-soft); font-size: .94rem; }

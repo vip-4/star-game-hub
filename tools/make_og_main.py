@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""生成星遊戲樂園首頁 OG 分享圖 (1200×630) - 七款遊戲 4+3 網格"""
+"""生成星遊戲樂園首頁 OG 分享圖 (1200×630) - 八款遊戲 4×2 網格"""
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
@@ -14,7 +14,7 @@ WHITE = "#ffffff"
 MUTED = "#a8a0c8"
 CARD_BG = "#1e1a3a"
 BORDER = "#3a3260"
-GAME_COLORS = ["#f5c451", "#5cff7c", "#ff6b5c", "#7c5cff", "#4ac8ff", "#ff5e9c", "#4ae0c0"]
+GAME_COLORS = ["#f5c451", "#5cff7c", "#ff6b5c", "#7c5cff", "#4ac8ff", "#ff5e9c", "#4ae0c0", "#ffd166"]
 
 
 def hex_to_rgb(h):
@@ -69,9 +69,9 @@ def main():
     # 標題（左側）
     draw.text((55, 40), "星遊戲樂園", font=font_title, fill=WHITE)
     draw.text((55, 100), "Star Game Hub", font=font_sub, fill=ACCENT)
-    draw.text((55, 132), "七款原創遊戲 · 單一靜態入口", font=font_small, fill=MUTED)
+    draw.text((55, 132), "八款原創遊戲 · 單一靜態入口", font=font_small, fill=MUTED)
 
-    # 七款遊戲卡片：4+3 網格（右側）
+    # 八款遊戲卡片：4×2 網格（右側）
     games = [
         ("星耀拉霸", "Star Spin", "🎰", "三轉輪老虎機"),
         ("星節奏", "Star Beat", "🎵", "四軌節奏"),
@@ -80,6 +80,7 @@ def main():
         ("星際射手", "Star Shooter", "🚀", "太空射擊"),
         ("星軌防衛", "Star Tunnel", "◎", "管狀射擊"),
         ("星塵危機", "Star Asteroids", "▲", "小行星射擊"),
+        ("星芒破塊", "Star Breaker", "▤", "打磚塊"),
     ]
 
     card_w, card_h, gap = 156, 240, 10

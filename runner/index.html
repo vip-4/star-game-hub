@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>星際跑者 Star Runner｜原創 HTML5 無限跑酷遊戲（靜態、無外部素材）</title>
+  <meta name="description" content="星際跑者 Star Runner 是一款原創 HTML5 無限跑酷遊戲。使用 Canvas 2D 與 Web Audio 製作，圖形與音效全部由程式產生，支援鍵盤與觸控、響應式版面，無外部素材、免註冊、免下載。">
+  <meta name="keywords" content="無限跑酷,跑酷遊戲,endless runner,HTML5 遊戲,Canvas 遊戲,Web Audio,原創遊戲,靜態遊戲,H5 game,休閒遊戲">
+  <meta name="author" content="Star Runner 開發團隊">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="theme-color" content="#f2f7f7">
+  <meta name="color-scheme" content="light">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <link rel="canonical" href="https://vip-4.github.io/star-game-hub/runner/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="星際跑者 Star Runner">
+  <meta property="og:locale" content="zh_TW">
+  <meta property="og:title" content="星際跑者 Star Runner｜原創 HTML5 無限跑酷遊戲">
+  <meta property="og:description" content="在星球間跳躍奔馳、收集星芒、閃避隕石。純靜態原創遊戲，免註冊、免下載，開啟瀏覽器就能玩。">
+  <meta property="og:url" content="https://vip-4.github.io/star-game-hub/runner/">
+  <meta property="og:image" content="https://vip-4.github.io/star-game-hub/runner/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="星際跑者 Star Runner 遊戲畫面，星星快遞員在平台上奔馳並收集星芒">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="星際跑者 Star Runner｜原創 HTML5 無限跑酷遊戲">
+  <meta name="twitter:description" content="純靜態無限跑酷遊戲，原創圖形與合成音效，支援手機與桌機。">
+  <meta name="twitter:image" content="https://vip-4.github.io/star-game-hub/runner/og-image.png">
+  <meta name="twitter:image:alt" content="星際跑者 Star Runner 遊戲畫面預覽">
+
+  <link rel="alternate" type="text/plain" href="../llms.txt" title="星遊戲樂園 LLM 友善摘要">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231d3a44'/%3E%3Cpath d='M32 8l5 13 14 1-11 9 4 14-12-8-12 8 4-14-11-9 14-1z' fill='%23ffd166'/%3E%3C/svg%3E">
+  <link rel="preload" href="css/style.css" as="style">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/game.js" defer></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://vip-4.github.io/star-game-hub/runner/#website",
+        "url": "https://vip-4.github.io/star-game-hub/runner/",
+        "name": "星際跑者 Star Runner",
+        "inLanguage": "zh-Hant",
+        "description": "原創 HTML5 無限跑酷遊戲首頁，提供遊戲介紹、操作說明與常見問題。"
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://vip-4.github.io/star-game-hub/runner/#organization",
+        "name": "Star Runner 開發團隊",
+        "url": "https://vip-4.github.io/star-game-hub/runner/"
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://vip-4.github.io/star-game-hub/runner/#webpage",
+        "url": "https://vip-4.github.io/star-game-hub/runner/",
+        "name": "星際跑者 Star Runner｜原創 HTML5 無限跑酷遊戲",
+        "isPartOf": { "@id": "https://vip-4.github.io/star-game-hub/runner/#website" },
+        "inLanguage": "zh-Hant",
+        "about": { "@id": "https://vip-4.github.io/star-game-hub/runner/#game" }
+      },
+      {
+        "@type": "GameApplication",
+        "@id": "https://vip-4.github.io/star-game-hub/runner/#game",
+        "name": "星際跑者 Star Runner",
+        "description": "原創無限跑酷遊戲。玩家操控星星快遞員在浮空平台間跳躍，收集星芒並閃避隕石；速度隨距離提升。圖形由 Canvas 2D 繪製，音效由 Web Audio 即時合成，不使用任何第三方素材。",
+        "url": "https://vip-4.github.io/star-game-hub/runner/",
+        "applicationCategory": "GameApplication",
+        "operatingSystem": "任何支援 HTML5 的瀏覽器",
+        "browserRequirements": "需支援 Canvas 2D 與 Web Audio API 的瀏覽器",
+        "isAccessibleForFree": true,
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "TWD",
+          "description": "免費遊玩，無內購、無註冊"
+        },
+        "featureList": [
+          "無限程序生成關卡與固定種子",
+          "按住跳躍鍵可跳得更高",
+          "星芒收集、隕石障礙與速度遞增",
+          "Canvas 2D 即時渲染與物件池粒子",
+          "鍵盤與觸控雙操作、ARIA 即時播報",
+          "響應式版面與減少動態效果支援"
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://vip-4.github.io/star-game-hub/runner/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "星際跑者在玩什麼？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "玩家操控一名星星快遞員，在浮空平台間自動向右奔馳。按跳躍鍵跨過空隙，收集星芒加分，並閃避阻擋在平台上的隕石。跑得越遠速度越快，跌落星海或撞上隕石即結束。"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "要怎麼操作星際跑者？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "鍵盤使用空白鍵、方向上鍵或 W 跳躍，按住可跳得更高；P 或 Esc 暫停，R 重新開始，M 切換音效。手機可直接點觸畫面或「跳躍」按鈕，一樣支援按住跳更高。"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "分數是怎麼計算的？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "每前進 12 個世界單位獲得 1 分，每收集一枚星芒額外獲得 50 分。最佳分數會儲存在瀏覽器本機，下次開啟時仍會顯示。"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "遊戲使用了第三方素材或遊戲引擎嗎？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "沒有。圖形由 Canvas 2D 逐幀繪製，音效由 Web Audio API 即時合成，沒有外部圖片、音檔、字型，也沒有使用任何遊戲引擎套件，因此沒有素材授權問題。"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "可以在手機上遊玩嗎？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "可以。介面採用響應式設計，並提供大型觸控跳躍按鈕。音效必須先點擊「開始遊戲」或「音效」按鈕才會解鎖，這符合 iOS Safari 與多數行動瀏覽器的自動播放限制。"
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#game-section">跳至遊戲區</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="#top" aria-label="星際跑者首頁">
+        <span class="brand-mark" aria-hidden="true">✦</span>
+        <span class="brand-text">星際跑者 <small>Star Runner</small></span>
+      </a>
+      <nav aria-label="主要導覽">
+        <ul class="nav-list">
+          <li><a href="#features">遊戲特色</a></li>
+          <li><a href="#how-to">玩法說明</a></li>
+          <li><a href="#faq">常見問題</a></li>
+          <li><a href="../">返回遊戲樂園</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top" class="wrap">
+    <section class="hero" aria-labelledby="page-title">
+      <p class="eyebrow">原創 · 純靜態 · 立即遊玩</p>
+      <h1 id="page-title">星際跑者 Star Runner：一款完全原創的 HTML5 無限跑酷遊戲</h1>
+      <p class="lead">
+        星際跑者是一款無限跑酷遊戲。星星快遞員會自動向前奔馳，
+        玩家只需掌握跳躍時機，跨越平台間的空隙、收集星芒並閃避隕石。
+        所有圖形由 Canvas 2D 繪製，音效由 Web Audio API 即時合成，
+        沒有外部素材、沒有後端，也不需要註冊或下載。
+      </p>
+      <dl class="fact-list" aria-label="遊戲重點摘要">
+        <div><dt>遊戲類型</dt><dd>無限跑酷／動作休閒</dd></div>
+        <div><dt>技術</dt><dd>Canvas 2D、ES6+、Web Audio</dd></div>
+        <div><dt>素材來源</dt><dd>原創繪製與程式合成，無第三方素材</dd></div>
+        <div><dt>費用</dt><dd>免費，無內購、無註冊</dd></div>
+      </dl>
+    </section>
+
+    <section id="game-section" class="game-section" aria-labelledby="game-heading">
+      <div class="section-heading">
+        <h2 id="game-heading">開始奔跑</h2>
+        <p>按下「開始遊戲」後角色會自動前進。使用空白鍵或畫面下方按鈕跳躍，按住可以跳得更高。</p>
+      </div>
+
+      <article class="game-card" aria-label="星際跑者遊戲介面">
+        <div class="hud" aria-label="遊戲狀態">
+          <div class="hud-item"><span class="hud-label">分數</span><output id="score" class="hud-value">0</output></div>
+          <div class="hud-item"><span class="hud-label">星芒</span><output id="crystals" class="hud-value">0</output></div>
+          <div class="hud-item"><span class="hud-label">距離</span><output id="distance" class="hud-value">0 m</output></div>
+          <div class="hud-item"><span class="hud-label">最佳</span><output id="best" class="hud-value">0</output></div>
+        </div>
+
+        <div class="canvas-frame">
+          <canvas id="runner-canvas" width="960" height="540" role="img"
+                  aria-label="無限跑酷遊戲畫面，目前尚未開始"></canvas>
+        </div>
+
+        <div class="controls">
+          <button type="button" id="start-button" class="primary-button">開始遊戲</button>
+          <button type="button" id="pause-button" class="utility-button" disabled>暫停</button>
+          <button type="button" id="reset-button" class="utility-button">重置</button>
+          <button type="button" id="sound-button" class="utility-button" aria-pressed="false" aria-label="開啟音效">🔇 音效</button>
+        </div>
+
+        <button type="button" id="jump-button" class="jump-button" aria-label="跳躍，快捷鍵空白鍵">
+          <span aria-hidden="true">↑</span> 跳躍 <small>按住跳更高</small>
+        </button>
+
+        <p id="live-region" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
+        <p id="status-text" class="status-text">等待開始 · 按空白鍵或「開始遊戲」</p>
+        <noscript><p class="noscript-note">此遊戲需要 JavaScript 才能運作，上方文字說明仍可正常閱讀。</p></noscript>
+      </article>
+    </section>
+
+    <section id="features" class="content-section" aria-labelledby="features-heading">
+      <div class="section-heading">
+        <h2 id="features-heading">遊戲特色</h2>
+        <p>以純前端技術達成流暢體驗，同時兼顧可索引內容與無障礙操作。</p>
+      </div>
+      <div class="card-grid">
+        <article class="info-card">
+          <h3>零外部素材</h3>
+          <p>沒有精靈圖、沒有 MP3、沒有外接字型。所有視覺元素由 Canvas 繪製，所有聲音由 Web Audio 合成，首屏只需少量 HTML、CSS 與 JavaScript。</p>
+        </article>
+        <article class="info-card">
+          <h3>流暢的跑酷手感</h3>
+          <p>採用時間軸驅動的物理與程序生成平台，按住跳躍鍵可延長上升時間；速度隨距離平緩提升，粒子效果由固定大小物件池管理以避免卡頓。</p>
+        </article>
+        <article class="info-card">
+          <h3>無障礙與行動支援</h3>
+          <p>提供鍵盤與觸控雙操作、ARIA 即時播報、清楚焦點樣式，並支援「減少動態效果」偏好設定。畫面會依裝置像素比調整，上限兩倍以避免過度繪製。</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="how-to" class="content-section" aria-labelledby="howto-heading">
+      <div class="section-heading">
+        <h2 id="howto-heading">玩法與計分</h2>
+        <p>規則單純，但想跑得遠需要掌握節奏。</p>
+      </div>
+      <ol class="steps">
+        <li><strong>開始遊戲。</strong>點擊「開始遊戲」或按空白鍵，同時解鎖音效。</li>
+        <li><strong>掌握跳躍。</strong>角色自動前進，遇到空隙就跳；按住跳躍鍵可跳得更高更遠。</li>
+        <li><strong>收集與閃避。</strong>碰觸星芒可加分，撞上紅色隕石或跌落畫面外即結束。</li>
+        <li><strong>刷新紀錄。</strong>最佳分數保存在本機瀏覽器，可按 R 立即再玩一次。</li>
+      </ol>
+      <h3>操作與計分</h3>
+      <div class="table-wrap">
+        <table class="score-table">
+          <caption>鍵盤／觸控操作與分數來源</caption>
+          <thead><tr><th scope="col">項目</th><th scope="col">操作／條件</th><th scope="col">效果</th></tr></thead>
+          <tbody>
+            <tr><td>跳躍</td><td>空白鍵、上鍵、W 或觸控按鈕</td><td>按住可延長上升，跨過更寬的空隙</td></tr>
+            <tr><td>暫停</td><td>P 或 Esc</td><td>凍結畫面與音效，再按一次繼續</td></tr>
+            <tr><td>重新開始</td><td>R</td><td>重置關卡與分數</td></tr>
+            <tr><td>距離分</td><td>每前進 12 個世界單位</td><td>+1 分</td></tr>
+            <tr><td>星芒</td><td>收集一枚星芒</td><td>+50 分</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="faq" class="content-section" aria-labelledby="faq-heading">
+      <div class="section-heading">
+        <h2 id="faq-heading">常見問題</h2>
+        <p>以下問答同時以結構化資料標記，方便搜尋引擎與生成式引擎摘要引用。</p>
+      </div>
+      <div class="faq-list">
+        <details><summary>星際跑者在玩什麼？</summary><p>玩家操控一名星星快遞員，在浮空平台間自動向右奔馳。按跳躍鍵跨過空隙，收集星芒加分，並閃避阻擋在平台上的隕石。跑得越遠速度越快，跌落星海或撞上隕石即結束。</p></details>
+        <details><summary>要怎麼操作星際跑者？</summary><p>鍵盤使用空白鍵、方向上鍵或 W 跳躍，按住可跳得更高；P 或 Esc 暫停，R 重新開始，M 切換音效。手機可直接點觸畫面或「跳躍」按鈕，一樣支援按住跳更高。</p></details>
+        <details><summary>分數是怎麼計算的？</summary><p>每前進 12 個世界單位獲得 1 分，每收集一枚星芒額外獲得 50 分。最佳分數會儲存在瀏覽器本機，下次開啟時仍會顯示。</p></details>
+        <details><summary>遊戲使用了第三方素材或遊戲引擎嗎？</summary><p>沒有。圖形由 Canvas 2D 逐幀繪製，音效由 Web Audio API 即時合成，沒有外部圖片、音檔、字型，也沒有使用任何遊戲引擎套件，因此沒有素材授權問題。</p></details>
+        <details><summary>可以在手機上遊玩嗎？</summary><p>可以。介面採用響應式設計，並提供大型觸控跳躍按鈕。音效必須先點擊「開始遊戲」或「音效」按鈕才會解鎖，這符合 iOS Safari 與多數行動瀏覽器的自動播放限制。</p></details>
+      </div>
+    </section>
+
+    <aside class="tech-aside" aria-labelledby="tech-heading">
+      <h2 id="tech-heading">技術摘要</h2>
+      <dl>
+        <dt>渲染</dt><dd>Canvas 2D，依 devicePixelRatio 縮放（上限 2 倍）</dd>
+        <dt>音訊</dt><dd>Web Audio API 即時合成，首次操作後解鎖</dd>
+        <dt>狀態機</dt><dd>IDLE → PLAYING ⇄ PAUSED → RESULT</dd>
+        <dt>關卡</dt><dd>固定種子偽隨機生成，有利重現與測試</dd>
+        <dt>效能</dt><dd>120 格粒子物件池、背景視差繪製、閒置時停止動畫影格</dd>
+        <dt>托管</dt><dd>純靜態檔案，無後端、無資料庫</dd>
+      </dl>
+    </aside>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <p><strong>原創聲明：</strong>本遊戲的玩法實作、圖形與音效皆為原創製作，由 Canvas 2D 與 Web Audio API 即時產生，未參考或複製任何特定第三方作品的程式碼或素材。</p>
+      <p>本網站僅供娛樂與技術展示，免費遊玩，無內購、無註冊、無現金交易。</p>
+      <p><a href="../llms.txt">LLM 友善摘要</a> · <a href="../sitemap.xml">網站地圖</a></p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""生成星遊戲樂園首頁 OG 分享圖 (1200×630) - 八款遊戲 4×2 網格"""
+"""生成星遊戲樂園首頁 OG 分享圖 (1200×630) - 九款遊戲網格"""
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
@@ -14,7 +14,7 @@ WHITE = "#ffffff"
 MUTED = "#a8a0c8"
 CARD_BG = "#1e1a3a"
 BORDER = "#3a3260"
-GAME_COLORS = ["#f5c451", "#5cff7c", "#ff6b5c", "#7c5cff", "#4ac8ff", "#ff5e9c", "#4ae0c0", "#ffd166"]
+GAME_COLORS = ["#f5c451", "#5cff7c", "#ff6b5c", "#7c5cff", "#4ac8ff", "#ff5e9c", "#4ae0c0", "#ffd166", "#b98cff"]
 
 
 def hex_to_rgb(h):
@@ -59,19 +59,19 @@ def main():
     try:
         font_title = ImageFont.truetype("C:/Windows/Fonts/msjhbd.ttc", 46)
         font_sub = ImageFont.truetype("C:/Windows/Fonts/msjh.ttc", 21)
-        font_card = ImageFont.truetype("C:/Windows/Fonts/msjhbd.ttc", 17)
-        font_card_sm = ImageFont.truetype("C:/Windows/Fonts/msjh.ttc", 12)
-        font_small = ImageFont.truetype("C:/Windows/Fonts/msjh.ttc", 11)
-        icon_font = ImageFont.truetype("C:/Windows/Fonts/seguiemj.ttf", 32)
+        font_card = ImageFont.truetype("C:/Windows/Fonts/msjhbd.ttc", 15)
+        font_card_sm = ImageFont.truetype("C:/Windows/Fonts/msjh.ttc", 10)
+        font_small = ImageFont.truetype("C:/Windows/Fonts/msjh.ttc", 10)
+        icon_font = ImageFont.truetype("C:/Windows/Fonts/seguiemj.ttf", 28)
     except:
         font_title = font_sub = font_card = font_card_sm = font_small = icon_font = ImageFont.load_default()
 
     # 標題（左側）
     draw.text((55, 40), "星遊戲樂園", font=font_title, fill=WHITE)
     draw.text((55, 100), "Star Game Hub", font=font_sub, fill=ACCENT)
-    draw.text((55, 132), "八款原創遊戲 · 單一靜態入口", font=font_small, fill=MUTED)
+    draw.text((55, 132), "九款原創遊戲 · 單一靜態入口", font=font_small, fill=MUTED)
 
-    # 八款遊戲卡片：4×2 網格（右側）
+    # 九款遊戲卡片：5×2 網格（右側）
     games = [
         ("星耀拉霸", "Star Spin", "🎰", "三轉輪老虎機"),
         ("星節奏", "Star Beat", "🎵", "四軌節奏"),
@@ -81,10 +81,11 @@ def main():
         ("星軌防衛", "Star Tunnel", "◎", "管狀射擊"),
         ("星塵危機", "Star Asteroids", "▲", "小行星射擊"),
         ("星芒破塊", "Star Breaker", "▤", "打磚塊"),
+        ("星脈分支", "Star Branch", "║", "分支防守"),
     ]
 
-    card_w, card_h, gap = 156, 240, 10
-    cols = 4
+    card_w, card_h, gap = 122, 240, 8
+    cols = 5
     grid_x, grid_y = 495, 42
 
     for i, (name, en, icon, desc) in enumerate(games):
@@ -99,13 +100,19 @@ def main():
                              fill=rgba(CARD_BG, 255), outline=rgba(BORDER, 255), width=2)
 
         # 圖示
-        cd.ellipse([card_w//2 - 28, 14, card_w//2 + 28, 70],
+        cd.ellipse([card_w//2 - 24, 14, card_w//2 + 24, 62],
                    fill=rgba(color, 35), outline=rgba(color, 110), width=2)
-        cd.text((card_w//2, 42), icon, font=icon_font, fill=color, anchor="mm")
+        cd.text((card_w//2, 38), icon, font=icon_font, fill=color, anchor="mm")
 
         # 名稱 / 英文 / 描述
-        cd.text((card_w//2, 100), name, font=font_card, fill=WHITE, anchor="mm")
-        cd.text((card_w//2, 128), en, font=font_card_sm, fill=MUTED, anchor="mm")
+        cd.text((card_w//2, 92), name, font=font_card, fill=WHITE, anchor="mm")
+        # 英文過長則換行
+        if len(en) > 12:
+            en_display = en.replace(' ', '\n', 1)
+        else:
+            en_display = en
+        cd.multiline_text((card_w//2, 122), en_display, font=font_card_sm,
+                          fill=MUTED, anchor="mm", align="center", spacing=2)
         cd.text((card_w//2, 158), desc, font=font_small, fill=rgba(color, 220), anchor="mm")
 
         # 免費標籤

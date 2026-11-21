@@ -1,0 +1,159 @@
+/* ============================================================
+   星際跑者 Star Runner — 全站樣式
+   淺色主題、高對比、無外部字型、單一 CSS
+   ============================================================ */
+
+:root {
+  --bg: #f2f7f7;
+  --surface: #ffffff;
+  --surface-alt: #e8f1f1;
+  --ink: #17343c;
+  --ink-soft: #526d73;
+  --line: #d2e2e2;
+  --accent: #127f86;
+  --accent-dark: #0c5f65;
+  --gold: #c8891c;
+  --gold-soft: #fdf5e2;
+  --danger: #b0344a;
+  --radius: 16px;
+  --shadow: 0 12px 32px rgba(23, 52, 60, 0.10);
+  --font: system-ui, -apple-system, "Segoe UI", "Noto Sans TC",
+          "Microsoft JhengHei", "PingFang TC", sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap { width: min(1040px, calc(100% - 2rem)); margin-inline: auto; }
+
+.skip-link {
+  position: absolute; left: -9999px; top: 0; z-index: 100;
+  padding: 0.6rem 1rem; background: var(--ink); color: #fff;
+  border-radius: 0 0 8px 0;
+}
+.skip-link:focus { left: 0; }
+
+a { color: var(--accent); text-underline-offset: 3px; }
+a:hover { color: var(--accent-dark); }
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+
+/* ---------- 頁首 ---------- */
+.site-header { background: var(--surface); border-bottom: 1px solid var(--line); }
+.header-inner {
+  display: flex; flex-wrap: wrap; gap: 1rem; align-items: center;
+  justify-content: space-between; padding-block: 0.9rem;
+}
+.brand { display: inline-flex; align-items: center; gap: 0.65rem; color: var(--ink); text-decoration: none; font-weight: 700; font-size: 1.15rem; }
+.brand-mark {
+  display: grid; place-items: center; width: 38px; height: 38px;
+  border-radius: 11px; background: var(--ink); color: #ffd166; font-size: 1.4rem;
+}
+.brand-text small { display: block; font-size: 0.7rem; font-weight: 500; color: var(--ink-soft); letter-spacing: 0.08em; }
+.nav-list { display: flex; flex-wrap: wrap; gap: 1.2rem; margin: 0; padding: 0; list-style: none; font-size: 0.94rem; font-weight: 600; }
+.nav-list a { color: var(--ink); text-decoration: none; }
+.nav-list a:hover { text-decoration: underline; }
+
+/* ---------- 摘要 ---------- */
+.hero { padding-block: 3rem 1.5rem; }
+.eyebrow { margin: 0 0 0.4rem; color: var(--accent); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.12em; }
+.hero h1 { max-width: 25ch; margin: 0 0 1rem; font-size: clamp(1.9rem, 4.5vw, 3rem); line-height: 1.25; letter-spacing: -0.02em; }
+.lead { max-width: 70ch; margin: 0 0 1.5rem; color: var(--ink-soft); font-size: clamp(1rem, 1.6vw, 1.1rem); }
+.fact-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 0.8rem; margin: 0; }
+.fact-list > div { padding: 0.8rem 1rem; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; }
+.fact-list dt { color: var(--ink-soft); font-size: 0.78rem; font-weight: 600; }
+.fact-list dd { margin: 0.15rem 0 0; font-weight: 700; font-size: 0.95rem; }
+
+/* ---------- 區段 ---------- */
+.section-heading { margin-bottom: 1.2rem; }
+.section-heading h2 { margin: 0 0 0.35rem; font-size: clamp(1.4rem, 2.8vw, 1.85rem); line-height: 1.3; }
+.section-heading p { margin: 0; color: var(--ink-soft); }
+
+/* ---------- 遊戲卡片 ---------- */
+.game-section { padding-block: 1.5rem 2.5rem; }
+.game-card { padding: clamp(1rem, 3vw, 1.8rem); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+.hud { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.7rem; margin-bottom: 1rem; }
+.hud-item { padding: 0.7rem 0.9rem; background: var(--surface-alt); border-radius: 10px; min-width: 0; }
+.hud-label { display: block; color: var(--ink-soft); font-size: 0.76rem; }
+.hud-value { display: block; font-size: 1.3rem; font-weight: 800; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+
+.canvas-frame { overflow: hidden; border-radius: 14px; background: #102b33; padding: clamp(0.4rem, 1.6vw, 0.9rem); }
+#runner-canvas { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; border-radius: 10px; touch-action: manipulation; }
+
+.controls { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-top: 1.1rem; }
+.primary-button, .utility-button, .jump-button {
+  font-family: inherit; font-weight: 700; cursor: pointer;
+  border-radius: 10px; touch-action: manipulation;
+  transition: transform 120ms ease, background-color 120ms ease;
+}
+.primary-button:active, .utility-button:active, .jump-button:active { transform: translateY(1px); }
+.primary-button { flex: 1 1 200px; min-height: 52px; color: #fff; background: var(--accent); border: 1px solid var(--accent-dark); font-size: 1.05rem; }
+.primary-button:hover:not(:disabled) { background: var(--accent-dark); }
+.primary-button:disabled { opacity: 0.55; cursor: not-allowed; }
+.utility-button { padding: 0.55rem 0.9rem; color: var(--ink); background: var(--surface); border: 1px solid var(--line); font-size: 0.9rem; }
+.utility-button[aria-pressed="true"] { background: var(--gold-soft); }
+.utility-button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.jump-button {
+  display: block; width: 100%; min-height: 72px; margin-top: 0.8rem;
+  color: #17343c; background: linear-gradient(180deg, #ffd166, #f0b429);
+  border: 2px solid #c8891c; font-size: 1.35rem; letter-spacing: 0.06em;
+}
+.jump-button small { display: block; font-size: 0.75rem; font-weight: 600; opacity: 0.8; letter-spacing: 0; }
+.jump-button.is-active { filter: brightness(1.08); transform: translateY(2px); }
+
+.status-text { margin: 0.9rem 0 0; color: var(--ink-soft); font-size: 0.9rem; text-align: center; }
+.noscript-note { margin: 1rem 0 0; padding: 0.8rem; color: var(--danger); background: #fff5f5; border-radius: 8px; }
+
+/* ---------- 內容區 ---------- */
+.content-section { padding-block: 2rem; border-top: 1px solid var(--line); }
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; }
+.info-card { padding: 1.2rem; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; }
+.info-card h3 { margin: 0 0 0.5rem; font-size: 1.08rem; }
+.info-card p { margin: 0; color: var(--ink-soft); font-size: 0.94rem; }
+
+.steps { padding-left: 1.4rem; color: var(--ink-soft); }
+.steps li { margin-bottom: 0.5rem; }
+.steps strong { color: var(--ink); }
+.table-wrap { overflow-x: auto; }
+.score-table { width: 100%; min-width: 440px; border-collapse: collapse; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.score-table caption { padding: 0.7rem; color: var(--ink-soft); font-size: 0.85rem; text-align: left; }
+.score-table th, .score-table td { padding: 0.65rem 0.9rem; border-bottom: 1px solid var(--line); text-align: left; }
+.score-table thead th { background: var(--surface-alt); font-size: 0.85rem; }
+.score-table tbody tr:last-child td { border-bottom: 0; }
+
+.faq-list { display: grid; gap: 0.7rem; }
+.faq-list details { padding: 0.9rem 1.1rem; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; }
+.faq-list summary { cursor: pointer; font-weight: 700; }
+.faq-list p { margin: 0.6rem 0 0; color: var(--ink-soft); font-size: 0.94rem; }
+
+.tech-aside { margin-block: 1rem 2.5rem; padding: 1.2rem; background: var(--gold-soft); border: 1px solid #e8d7a6; border-radius: 14px; }
+.tech-aside h2 { margin: 0 0 0.7rem; font-size: 1.15rem; }
+.tech-aside dl { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.5rem 1rem; margin: 0; }
+.tech-aside dt { font-weight: 700; font-size: 0.85rem; }
+.tech-aside dd { margin: 0 0 0.4rem; color: var(--ink-soft); font-size: 0.88rem; }
+
+.site-footer { background: var(--ink); color: #e8ecf5; padding-block: 1.8rem; font-size: 0.85rem; }
+.footer-inner p { margin: 0.4rem 0; }
+.site-footer a { color: #ffe09a; }
+
+.sr-only { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+@media (max-width: 620px) {
+  .hud { grid-template-columns: 1fr 1fr; }
+  .controls .primary-button { flex-basis: 100%; }
+  .jump-button { min-height: 84px; }
+}

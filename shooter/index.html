@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>星際射手 Star Shooter｜原創太空射擊遊戲</title>
+  <meta name="description" content="星際射手：原創太空射擊遊戲。操控戰機穿越敵群波次，收集強化道具，擊敗首領。Canvas 2D 程序繪圖、Web Audio 即時合成音效、零外部素材、免註冊即玩。">
+  <meta name="keywords" content="太空射擊,STG,彈幕射擊,HTML5 遊戲,Canvas 遊戲,Web Audio,原創遊戲,輕量遊戲,星際射手">
+  <meta name="author" content="Star Game Hub 開發團隊">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="theme-color" content="#0d0a1a">
+  <meta name="color-scheme" content="light dark">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <link rel="canonical" href="https://vip-4.github.io/star-game-hub/shooter/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="星遊戲樂園 Star Game Hub">
+  <meta property="og:locale" content="zh_TW">
+  <meta property="og:title" content="星際射手 Star Shooter｜原創太空射擊遊戲">
+  <meta property="og:description" content="原創太空射擊遊戲：程序生成敵群波次、粒子爆炸特效、Web Audio 音效。無外部素材、免註冊、免下載。">
+  <meta property="og:url" content="https://vip-4.github.io/star-game-hub/shooter/">
+  <meta property="og:image" content="https://vip-4.github.io/star-game-hub/shooter/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="星際射手遊戲畫面預覽：戰機、敵機、粒子爆炸與星空背景">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="星際射手 Star Shooter｜原創太空射擊遊戲">
+  <meta name="twitter:description" content="原創太空射擊遊戲，程序生成波次與粒子特效，支援鍵盤與觸控。">
+  <meta name="twitter:image" content="https://vip-4.github.io/star-game-hub/shooter/og-image.png">
+  <meta name="twitter:image:alt" content="星際射手遊戲畫面預覽">
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "GameApplication",
+    "name": "星際射手 Star Shooter",
+    "description": "原創太空射擊遊戲：操控戰機穿越程序生成的敵群波次，收集強化道具，擊敗首領。Canvas 2D 程序繪圖、Web Audio 即時合成音效、零外部素材。",
+    "url": "https://vip-4.github.io/star-game-hub/shooter/",
+    "applicationCategory": "GameApplication",
+    "operatingSystem": "任何支援 HTML5 的瀏覽器",
+    "isAccessibleForFree": true,
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TWD" },
+    "genre": ["Shooter", "Arcade", "Action"],
+    "gamePlatform": "Web Browser",
+    "author": { "@type": "Organization", "name": "Star Game Hub 開發團隊" }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#game">跳至遊戲區域</a>
+
+  <header class="page-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="../" aria-label="返回星遊戲樂園首頁">
+        <span class="brand-mark" aria-hidden="true">★</span>
+        <span class="brand-text">星遊戲樂園</span>
+      </a>
+      <h1>星際射手 Star Shooter</h1>
+    </div>
+  </header>
+
+  <main class="wrap" id="game">
+    <section class="game-area" aria-labelledby="game-title">
+      <div class="canvas-wrap">
+        <canvas id="game-canvas" aria-label="星際射手遊戲畫面，載入中…" tabindex="0"></canvas>
+        <div id="overlay" class="overlay hidden" role="dialog" aria-modal="true" aria-labelledby="overlay-title">
+          <div class="overlay-content">
+            <h2 id="overlay-title">遊戲標題</h2>
+            <p id="overlay-message">遊戲訊息</p>
+            <div class="overlay-controls">
+              <button id="btn-start" class="btn primary" autofocus>開始遊戲</button>
+              <button id="btn-mute" class="btn secondary">靜音</button>
+            </div>
+            <p class="controls-hint" id="controls-hint"></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hud" aria-label="遊戲狀態資訊">
+        <div class="hud-item"><span class="hud-label">分數</span><span id="hud-score" class="hud-value">0</span></div>
+        <div class="hud-item"><span class="hud-label">波次</span><span id="hud-wave" class="hud-value">1</span></div>
+        <div class="hud-item"><span class="hud-label">生命</span><span id="hud-lives" class="hud-value">♥♥♥</span></div>
+        <div class="hud-item"><span class="hud-label">火力</span><span id="hud-power" class="hud-value">●</span></div>
+      </div>
+    </section>
+
+    <section class="info-section" aria-labelledby="info-title">
+      <h2 id="info-title" class="visually-hidden">遊戲說明</h2>
+      <div class="controls-grid">
+        <article class="control-card">
+          <h3>鍵盤操作</h3>
+          <ul>
+            <li><kbd>←</kbd><kbd>→</kbd> 或 <kbd>A</kbd><kbd>D</kbd>：左右移動</li>
+            <li><kbd>Space</kbd> / <kbd>W</kbd> / <kbd>↑</kbd>：發射</li>
+            <li><kbd>P</kbd> / <kbd>Esc</kbd>：暫停/繼續</li>
+            <li><kbd>M</kbd>：切換靜音</li>
+          </ul>
+        </article>
+        <article class="control-card">
+          <h3>觸控操作</h3>
+          <ul>
+            <li>左右滑動/按鈕：移動戰機</li>
+            <li>點擊發射鈕：連續發射</li>
+            <li>雙指或暫停鈕：暫停</li>
+          </ul>
+        </article>
+        <article class="control-card">
+          <h3>遊戲機制</h3>
+          <ul>
+            <li>擊殺敵機得分，波次遞增難度</li>
+            <li>收集道具：火力提升、護盾、加命</li>
+            <li>每 5 波出現首領機</li>
+            <li>生命歸零遊戲結束</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="tech-section" aria-labelledby="tech-title">
+      <h2 id="tech-title" class="visually-hidden">技術資訊</h2>
+      <dl class="tech-list">
+        <dt>渲染</dt><dd>Canvas 2D，依裝置像素比縮放</dd>
+        <dt>音訊</dt><dd>Web Audio API 即時合成，首次互動後解鎖</dd>
+        <dt>圖形</dt><dd>程序生成幾何圖形，無外部圖片素材</dd>
+        <dt>關卡</dt><dd>程序生成波次與首領，無限遊玩</dd>
+        <dt>無障礙</dt><dd>ARIA 標籤、鍵盤完整操作、prefers-reduced-motion</dd>
+      </dl>
+    </section>
+  </main>
+
+  <footer class="page-footer">
+    <div class="wrap footer-inner">
+      <p><a href="../">← 返回星遊戲樂園首頁</a></p>
+      <p>零外部素材 · 免註冊 · 開啟即玩</p>
+    </div>
+  </footer>
+
+  <script src="js/game.js"></script>
+</body>
+</html>

@@ -1,6 +1,6 @@
 # 星遊戲樂園 Star Game Hub
 
-四款原創輕量靜態 H5 遊戲入口，無後端、無外部素材、免註冊、免下載。
+五款原創輕量靜態 H5 遊戲入口，無後端、無外部素材、免註冊、免下載。
 
 ## 線上體驗
 
@@ -15,6 +15,7 @@
 | 星節奏 Star Beat | 四軌節奏 | D F J K / 方向鍵 / 觸控 | [rhythm/](rhythm/) |
 | 星際跑者 Star Runner | 無限跑酷 | 空白鍵/上鍵/W / 觸控 | [runner/](runner/) |
 | 星影解謎 Star Puzzle | 分身平台解謎 | A/D、空白鍵、C/X / 觸控 | [puzzle/](puzzle/) |
+| 星際射手 Star Shooter | 太空射擊 (STG) | ←/→ 移動、Space 發射、P 暫停 / 觸控 | [shooter/](shooter/) |
 
 ## 技術特色
 
@@ -40,7 +41,7 @@ python -m http.server 8000
 
 ```
 game-hub-static/
-├── index.html          # 首頁（含四款遊戲卡片、比較表、FAQ、JSON-LD）
+├── index.html          # 首頁（含五款遊戲卡片、比較表、FAQ、JSON-LD）
 ├── css/style.css       # 共用樣式
 ├── llms.txt            # LLM 友善摘要
 ├── sitemap.xml         # 網站地圖
@@ -58,6 +59,10 @@ game-hub-static/
 │   ├── css/style.css
 │   └── js/game.js
 ├── puzzle/             # 星影解謎
+│   ├── index.html
+│   ├── css/style.css
+│   └── js/game.js
+├── shooter/            # 星際射手
 │   ├── index.html
 │   ├── css/style.css
 │   └── js/game.js
@@ -83,7 +88,7 @@ game-hub-static/
 
 **星耀拉霸**使用虛擬幣系統，不具現金價值，不得兌換現金或有價物品，僅供娛樂展示用途。
 
-四款遊戲皆**不包含任何第三方遊戲素材**（圖片、音檔、字型、引擎等），避免素材授權風險。
+五款遊戲皆**不包含任何第三方遊戲素材**（圖片、音檔、字型、引擎等），避免素材授權風險。
 
 ## 致謝
 

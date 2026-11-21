@@ -1,13 +1,14 @@
 # 星遊戲樂園 Star Game Hub
 
-單一靜態網站入口，收錄兩款原創 H5 遊戲：
+單一靜態網站入口，收錄三款原創 H5 遊戲：
 
 - **星耀拉霸 Star Spin**（`/slots/`）：三轉輪老虎機，使用加密隨機數加權抽樣與虛擬幣，僅供娛樂。
 - **星節奏 Star Beat**（`/rhythm/`）：四軌節奏遊戲，圖形與音效全部由程式即時產生。
+- **星際跑者 Star Runner**（`/runner/`）：無限跑酷遊戲，固定種子程序生成關卡、星芒收集與隕石障礙。
 
-兩款遊戲都不使用外部圖片、音檔、字型或遊戲引擎套件，無後端、無資料庫，可直接部署到任何靜態托管平台。
+三款遊戲都不使用外部圖片、音檔、字型或遊戲引擎套件，無後端、無資料庫，可直接部署到任何靜態托管平台。
 
-> 星耀拉霸的虛擬幣不具現金價值，不得兌換現金或有價物品。兩款遊戲皆非任何既有商業遊戲的移植或仿作。
+> 星耀拉霸的虛擬幣不具現金價值，不得兌換現金或有價物品。三款遊戲皆非任何既有商業遊戲的移植或仿作。
 
 ---
 
@@ -27,6 +28,11 @@ game-hub-static/
 │   ├── css/style.css
 │   ├── js/game.js
 │   └── og-image.png
+├── runner/                  # 星際跑者遊戲
+│   ├── index.html
+│   ├── css/style.css
+│   ├── js/game.js
+│   └── og-image.png
 ├── og-image.png             # 整合站分享圖
 ├── .nojekyll
 ├── _headers                 # Cloudflare Pages 標頭
@@ -41,9 +47,9 @@ game-hub-static/
 ## SEO / GEO
 
 - 語意化 HTML、完整 meta、canonical、Open Graph、Twitter Card
-- JSON-LD：`WebSite`、`Organization`、`WebPage`、`ItemList`（兩款遊戲）、`FAQPage`（5 題）
-- 兩個遊戲子頁的 canonical 與社群中繼資料已指向整合站對應路徑
-- `sitemap.xml` 收錄首頁與兩個遊戲頁；`llms.txt` 提供生成式引擎友善摘要
+- JSON-LD：`WebSite`、`Organization`、`WebPage`、`ItemList`（三款遊戲）、`FAQPage`（5 題）
+- 三個遊戲子頁的 canonical 與社群中繼資料已指向整合站對應路徑
+- `sitemap.xml` 收錄首頁與三個遊戲頁；`llms.txt` 提供生成式引擎友善摘要
 
 正式網址：https://vip-4.github.io/star-game-hub/
 
@@ -59,6 +65,7 @@ game-hub-static/
 ```bash
 node tools/smoke-test-slots.js
 node tools/smoke-test-rhythm.js
+node tools/smoke-test-runner.js
 python -m http.server 8080 -d .
 ```
 

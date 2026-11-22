@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>星際對決 Star Duel｜原創雙人同屏對戰遊戲</title>
+  <meta name="description" content="星際對決：原創雙人同屏對戰遊戲（空中曲棍球）。操控圓形戰機在半場內二維移動，撞擊能量球射入對方球門。支援雙人對戰與 AI 對手，Canvas 2D 程序繪圖、Web Audio 音效、零外部素材。">
+  <meta name="keywords" content="雙人遊戲,同屏對戰,空中曲棍球,air hockey,HTML5 遊戲,Canvas 遊戲,Web Audio,原創遊戲,輕量遊戲,星際對決">
+  <meta name="author" content="Star Game Hub 開發團隊">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="theme-color" content="#0c1018">
+  <meta name="color-scheme" content="light dark">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <link rel="canonical" href="https://vip-4.github.io/star-game-hub/duel/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="星遊戲樂園 Star Game Hub">
+  <meta property="og:locale" content="zh_TW">
+  <meta property="og:title" content="星際對決 Star Duel｜原創雙人同屏對戰遊戲">
+  <meta property="og:description" content="原創雙人同屏對戰：空中曲棍球風格的星際對決。雙人對戰或挑戰 AI，無外部素材、免註冊、免下載。">
+  <meta property="og:url" content="https://vip-4.github.io/star-game-hub/duel/">
+  <meta property="og:image" content="https://vip-4.github.io/star-game-hub/duel/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="星際對決遊戲畫面預覽：雙人戰機與能量球在對戰場地中">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="星際對決 Star Duel｜原創雙人同屏對戰遊戲">
+  <meta name="twitter:description" content="原創雙人同屏對戰遊戲，支援 AI 對手與觸控操作。">
+  <meta name="twitter:image" content="https://vip-4.github.io/star-game-hub/duel/og-image.png">
+  <meta name="twitter:image:alt" content="星際對決遊戲畫面預覽">
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "GameApplication",
+    "name": "星際對決 Star Duel",
+    "description": "原創雙人同屏對戰遊戲，靈感來自空中曲棍球。兩位玩家操控圓形戰機在各自半場二維移動，撞擊能量球射入對方球門，先得 7 分獲勝；另提供 AI 對手模式。Canvas 2D 程序繪圖、Web Audio 即時合成音效、零外部素材。",
+    "url": "https://vip-4.github.io/star-game-hub/duel/",
+    "applicationCategory": "GameApplication",
+    "operatingSystem": "任何支援 HTML5 的瀏覽器",
+    "isAccessibleForFree": true,
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TWD" },
+    "genre": ["Action", "Arcade", "Multiplayer"],
+    "gamePlatform": "Web Browser",
+    "author": { "@type": "Organization", "name": "Star Game Hub 開發團隊" }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#game">跳至遊戲區域</a>
+
+  <header class="page-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="../" aria-label="返回星遊戲樂園首頁">
+        <span class="brand-mark" aria-hidden="true">★</span>
+        <span class="brand-text">星遊戲樂園</span>
+      </a>
+      <h1>星際對決 Star Duel</h1>
+    </div>
+  </header>
+
+  <main class="wrap" id="game">
+    <section class="game-area" aria-labelledby="game-title">
+      <h2 id="game-title" class="visually-hidden">遊戲畫面</h2>
+
+      <div class="scoreboard" aria-label="比分">
+        <div class="team team-left">
+          <span class="team-name">玩家 1</span>
+          <strong id="hud-left" aria-label="玩家一得分">0</strong>
+        </div>
+        <div class="score-mid">
+          <span id="hud-target">先得 7 分</span>
+          <span id="hud-mode" class="mode-tag">雙人</span>
+        </div>
+        <div class="team team-right">
+          <span class="team-name" id="right-label">玩家 2</span>
+          <strong id="hud-right" aria-label="玩家二得分">0</strong>
+        </div>
+      </div>
+
+      <div class="canvas-wrap">
+        <canvas id="game-canvas" aria-label="星際對決對戰場地，左側玩家一、右側玩家二" tabindex="0"></canvas>
+        <div id="overlay" class="overlay" role="dialog" aria-modal="true" aria-labelledby="overlay-title">
+          <div class="overlay-content">
+            <h2 id="overlay-title">星際對決 Star Duel</h2>
+            <p id="overlay-message">選擇模式，操控戰機將能量球送入對方球門</p>
+            <div class="mode-select" role="group" aria-label="遊戲模式">
+              <button id="btn-mode-pvp" class="btn primary" aria-pressed="true">雙人對戰</button>
+              <button id="btn-mode-ai" class="btn secondary" aria-pressed="false">對戰 AI</button>
+            </div>
+            <div class="overlay-controls">
+              <button id="btn-start" class="btn primary">開始遊戲</button>
+              <button id="btn-mute" class="btn secondary">音效：開</button>
+            </div>
+            <p class="controls-hint" id="controls-hint">玩家 1：WASD　玩家 2：方向鍵　P 暫停　M 音效</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="action-row">
+        <button id="btn-new" class="action-btn">重新開始</button>
+        <button id="btn-pause" class="action-btn">暫停 / 繼續</button>
+      </div>
+      <p id="live-status" class="visually-hidden" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="info-section" aria-labelledby="info-title">
+      <h2 id="info-title" class="visually-hidden">遊戲說明</h2>
+      <div class="controls-grid">
+        <article class="control-card">
+          <h3>玩家 1（左側）</h3>
+          <ul>
+            <li><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd>：二維移動戰機</li>
+            <li>只能在左半場活動</li>
+          </ul>
+        </article>
+        <article class="control-card">
+          <h3>玩家 2 / AI（右側）</h3>
+          <ul>
+            <li><kbd>↑</kbd><kbd>←</kbd><kbd>↓</kbd><kbd>→</kbd>：二維移動戰機</li>
+            <li>選擇「對戰 AI」則由電腦控制</li>
+          </ul>
+        </article>
+        <article class="control-card">
+          <h3>觸控與規則</h3>
+          <ul>
+            <li>觸控：拖曳各自半場的戰機</li>
+            <li>撞擊能量球送入對方球門得分</li>
+            <li>先得 7 分獲勝　<kbd>P</kbd> 暫停</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="tech-section" aria-labelledby="tech-title">
+      <h2 id="tech-title" class="visually-hidden">技術資訊</h2>
+      <dl class="tech-list">
+        <dt>渲染</dt><dd>Canvas 2D 圓形戰機與粒子，依裝置像素比縮放</dd>
+        <dt>音訊</dt><dd>Web Audio API 即時合成，首次互動後解鎖</dd>
+        <dt>物理</dt><dd>圓形碰撞、動量轉移、邊界反彈</dd>
+        <dt>模式</dt><dd>本地雙人同屏 / AI 對手</dd>
+        <dt>無障礙</dt><dd>ARIA 標籤、狀態播報、完整鍵盤操作</dd>
+      </dl>
+    </section>
+  </main>
+
+  <footer class="page-footer">
+    <div class="wrap footer-inner">
+      <p><a href="../">← 返回星遊戲樂園首頁</a></p>
+      <p>零外部素材 · 免註冊 · 開啟即玩</p>
+    </div>
+  </footer>
+
+  <script src="js/game.js"></script>
+</body>
+</html>

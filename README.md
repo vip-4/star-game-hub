@@ -1,6 +1,6 @@
 # 星遊戲樂園 Star Game Hub
 
-十款原創輕量靜態 H5 遊戲入口，無後端、無外部素材、免註冊、免下載。
+十一款原創輕量靜態 H5 遊戲入口，無後端、無外部素材、免註冊、免下載。
 
 ## 線上體驗
 
@@ -21,6 +21,7 @@
 | 星芒破塊 Star Breaker | 打磚塊 | ←/→ 移動、Space 發射 / 拖曳 | [breaker/](breaker/) |
 | 星脈分支 Star Branch | 分支防守 | 1-4 切色、Space 分裂合併 / 觸控 | [branch/](branch/) |
 | 星蛇尋跡 Star Serpent | 貪吃蛇 | 方向鍵 / WASD / 滑動 | [serpent/](serpent/) |
+| 星芒合成 Star Merge | 2048 數字合成 | 方向鍵 / 滑動 / Z 撤銷 / H 提示 | [merge/](merge/) |
 
 ## 技術特色
 
@@ -46,7 +47,7 @@ python -m http.server 8000
 
 ```
 game-hub-static/
-├── index.html          # 首頁（含十款遊戲卡片、比較表、FAQ、JSON-LD）
+├── index.html          # 首頁（含十一款遊戲卡片、比較表、FAQ、JSON-LD）
 ├── css/style.css       # 共用樣式
 ├── llms.txt            # LLM 友善摘要
 ├── sitemap.xml         # 網站地圖
@@ -91,6 +92,10 @@ game-hub-static/
 │   ├── index.html
 │   ├── css/style.css
 │   └── js/game.js
+├── merge/              # 星芒合成
+│   ├── index.html
+│   ├── css/style.css
+│   └── js/game.js
 └── tools/              # 開發工具（煙測、OG 圖生成）
 ```
 
@@ -113,7 +118,7 @@ game-hub-static/
 
 **星耀拉霸**使用虛擬幣系統，不具現金價值，不得兌換現金或有價物品，僅供娛樂展示用途。
 
-十款遊戲皆**不包含任何第三方遊戲素材**（圖片、音檔、字型、引擎等），避免素材授權風險。
+十一款遊戲皆**不包含任何第三方遊戲素材**（圖片、音檔、字型、引擎等），避免素材授權風險。
 
 ## 致謝
 

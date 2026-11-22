@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>星芒合成 Star Merge｜原創 2048 數字遊戲</title>
+  <meta name="description" content="星芒合成：原創 2048 數字合成遊戲。滑動或按方向鍵合併相同數字，目標合成 2048。撤銷、提示、最佳分數與流暢動畫。Canvas 2D 程序繪圖、Web Audio 音效、零外部素材、免註冊即玩。">
+  <meta name="keywords" content="2048,數字合成,益智遊戲,滑動遊戲,HTML5 遊戲,Canvas 遊戲,Web Audio,原創遊戲,輕量遊戲,星芒合成">
+  <meta name="author" content="Star Game Hub 開發團隊">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="theme-color" content="#faf6ef">
+  <meta name="color-scheme" content="light dark">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <link rel="canonical" href="https://vip-4.github.io/star-game-hub/merge/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="星遊戲樂園 Star Game Hub">
+  <meta property="og:locale" content="zh_TW">
+  <meta property="og:title" content="星芒合成 Star Merge｜原創 2048 數字遊戲">
+  <meta property="og:description" content="原創 2048 數字合成遊戲：滑動合併、撤銷、提示、最佳分數。無外部素材、免註冊、免下載。">
+  <meta property="og:url" content="https://vip-4.github.io/star-game-hub/merge/">
+  <meta property="og:image" content="https://vip-4.github.io/star-game-hub/merge/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="星芒合成遊戲畫面預覽：4×4 數字網格與合成動畫">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="星芒合成 Star Merge｜原創 2048 數字遊戲">
+  <meta name="twitter:description" content="原創 2048 數字合成遊戲，支援滑動、鍵盤、撤銷與提示。">
+  <meta name="twitter:image" content="https://vip-4.github.io/star-game-hub/merge/og-image.png">
+  <meta name="twitter:image:alt" content="星芒合成遊戲畫面預覽">
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "GameApplication",
+    "name": "星芒合成 Star Merge",
+    "description": "原創 2048 數字合成遊戲：滑動或按方向鍵合併相同數字，目標合成 2048。提供撤銷、提示、最佳分數與流暢動畫。Canvas 2D 程序繪圖、Web Audio 即時合成音效、零外部素材。",
+    "url": "https://vip-4.github.io/star-game-hub/merge/",
+    "applicationCategory": "GameApplication",
+    "operatingSystem": "任何支援 HTML5 的瀏覽器",
+    "isAccessibleForFree": true,
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TWD" },
+    "genre": ["Puzzle", "Strategy"],
+    "gamePlatform": "Web Browser",
+    "author": { "@type": "Organization", "name": "Star Game Hub 開發團隊" }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#game">跳至遊戲區域</a>
+
+  <header class="page-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="../" aria-label="返回星遊戲樂園首頁">
+        <span class="brand-mark" aria-hidden="true">★</span>
+        <span class="brand-text">星遊戲樂園</span>
+      </a>
+      <h1>星芒合成 Star Merge</h1>
+    </div>
+  </header>
+
+  <main class="wrap" id="game">
+    <section class="game-area" aria-labelledby="game-title">
+      <h2 id="game-title" class="visually-hidden">遊戲畫面</h2>
+      <div class="score-row">
+        <div class="score-box"><span class="score-label">分數</span><strong id="hud-score">0</strong></div>
+        <div class="score-box"><span class="score-label">最佳</span><strong id="hud-best">0</strong></div>
+      </div>
+      <div class="board-wrap">
+        <canvas id="game-canvas" aria-label="星芒合成 4 乘 4 數字網格，使用方向鍵或滑動合併數字" tabindex="0" role="img"></canvas>
+        <div id="overlay" class="overlay hidden" role="dialog" aria-modal="true" aria-labelledby="overlay-title">
+          <div class="overlay-content">
+            <h2 id="overlay-title">遊戲標題</h2>
+            <p id="overlay-message">遊戲訊息</p>
+            <div class="overlay-controls">
+              <button id="btn-start" class="btn primary" autofocus>開始遊戲</button>
+              <button id="btn-mute" class="btn secondary">音效：開</button>
+            </div>
+            <p class="controls-hint" id="controls-hint"></p>
+          </div>
+        </div>
+      </div>
+      <div class="action-row">
+        <button id="btn-new" class="action-btn primary">新遊戲</button>
+        <button id="btn-undo" class="action-btn">撤銷</button>
+        <button id="btn-hint" class="action-btn">提示</button>
+      </div>
+      <p id="live-status" class="visually-hidden" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="info-section" aria-labelledby="info-title">
+      <h2 id="info-title" class="visually-hidden">遊戲說明</h2>
+      <div class="controls-grid">
+        <article class="control-card">
+          <h3>鍵盤操作</h3>
+          <ul>
+            <li><kbd>↑</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd> 或 <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd>：滑動合併</li>
+            <li><kbd>Z</kbd>：撤銷一步　<kbd>H</kbd>：提示</li>
+            <li><kbd>R</kbd>：重新開始　<kbd>M</kbd>：切換音效</li>
+          </ul>
+        </article>
+        <article class="control-card">
+          <h3>觸控操作</h3>
+          <ul>
+            <li>在畫面上滑動：往該方向合併</li>
+            <li>新遊戲／撤銷／提示按鈕</li>
+          </ul>
+        </article>
+        <article class="control-card">
+          <h3>遊戲規則</h3>
+          <ul>
+            <li>相同數字相撞會合併加倍</li>
+            <li>每次移動生成一個新方塊</li>
+            <li>合成 2048 即獲勝，可繼續挑戰</li>
+            <li>網格填滿且無法合併時遊戲結束</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="tech-section" aria-labelledby="tech-title">
+      <h2 id="tech-title" class="visually-hidden">技術資訊</h2>
+      <dl class="tech-list">
+        <dt>渲染</dt><dd>Canvas 2D 圓角網格與動畫，依裝置像素比縮放</dd>
+        <dt>音訊</dt><dd>Web Audio API 即時合成，首次互動後解鎖</dd>
+        <dt>功能</dt><dd>撤銷、提示、最佳分數（localStorage）</dd>
+        <dt>圖形</dt><dd>程序生成方塊配色與粒子，無外部圖片</dd>
+        <dt>無障礙</dt><dd>ARIA 標籤、狀態播報、完整鍵盤操作</dd>
+      </dl>
+    </section>
+  </main>
+
+  <footer class="page-footer">
+    <div class="wrap footer-inner">
+      <p><a href="../">← 返回星遊戲樂園首頁</a></p>
+      <p>零外部素材 · 免註冊 · 開啟即玩</p>
+    </div>
+  </footer>
+
+  <script src="js/game.js"></script>
+</body>
+</html>
